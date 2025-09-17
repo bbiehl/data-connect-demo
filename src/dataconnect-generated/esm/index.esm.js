@@ -1,7 +1,7 @@
 import { queryRef, executeQuery, mutationRef, executeMutation, validateArgs } from 'firebase/data-connect';
 
 export const connectorConfig = {
-  connector: 'example',
+  connector: 'connector',
   service: 'data-connect-demo',
   location: 'us-central1'
 };

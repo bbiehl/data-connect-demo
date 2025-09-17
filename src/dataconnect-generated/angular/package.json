@@ -2,7 +2,7 @@
   "name": "@dataconnect/generated-angular",
   "version": "1.0.0",
   "author": "Firebase <firebase-support@google.com> (https://firebase.google.com/)",
-  "description": "Generated SDK For example-angular",
+  "description": "Generated SDK For connector-angular",
   "license": "Apache-2.0",
   "engines": {
     "node": " >=18.0"
