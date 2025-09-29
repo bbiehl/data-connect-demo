@@ -5,11 +5,7 @@ import {
 } from '@angular/core';
 import { getAnalytics, provideAnalytics } from '@angular/fire/analytics';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import {
-  getDataConnect,
-  provideDataConnect
-  
-} from '@angular/fire/data-connect';
+import { getDataConnect, provideDataConnect } from '@angular/fire/data-connect';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
 import { connectorConfig } from '@dataconnect/generated';
