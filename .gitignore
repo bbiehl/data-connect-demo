@@ -5,6 +5,8 @@
 /tmp
 /out-tsc
 /bazel-out
+/dataconnect/.dataconnect
+*.log
 
 # Node
 /node_modules
