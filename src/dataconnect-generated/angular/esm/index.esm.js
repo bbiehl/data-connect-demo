@@ -1,4 +1,4 @@
-import { createMovieRef, upsertUserRef, addReviewRef, deleteReviewRef, listMoviesRef, listUsersRef, listUserReviewsRef, getMovieByIdRef, searchMovieRef } from '../../';
+import { createMovieRef, upsertUserRef, upsertReviewRef, deleteReviewRef, listMoviesRef, listUsersRef, listUserReviewsRef, getMovieByIdRef, searchMovieRef } from '../../';
 import { DataConnect, CallerSdkTypeEnum } from '@angular/fire/data-connect';
 import { injectDataConnectQuery, injectDataConnectMutation } from '@tanstack-query-firebase/angular/data-connect';
 import { inject, EnvironmentInjector } from '@angular/core';
@@ -10,8 +10,8 @@ export function injectUpsertUser(args, injector) {
   return injectDataConnectMutation(upsertUserRef, args, injector, CallerSdkTypeEnum.GeneratedAngular);
 }
 
-export function injectAddReview(args, injector) {
-  return injectDataConnectMutation(addReviewRef, args, injector, CallerSdkTypeEnum.GeneratedAngular);
+export function injectUpsertReview(args, injector) {
+  return injectDataConnectMutation(upsertReviewRef, args, injector, CallerSdkTypeEnum.GeneratedAngular);
 }
 
 export function injectDeleteReview(args, injector) {

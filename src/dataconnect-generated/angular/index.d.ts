@@ -1,4 +1,4 @@
-import { CreateMovieData, CreateMovieVariables, UpsertUserData, UpsertUserVariables, AddReviewData, AddReviewVariables, DeleteReviewData, DeleteReviewVariables, ListMoviesData, ListUsersData, ListUserReviewsData, GetMovieByIdData, GetMovieByIdVariables, SearchMovieData, SearchMovieVariables } from '../';
+import { CreateMovieData, CreateMovieVariables, UpsertUserData, UpsertUserVariables, UpsertReviewData, UpsertReviewVariables, DeleteReviewData, DeleteReviewVariables, ListMoviesData, ListUsersData, ListUserReviewsData, GetMovieByIdData, GetMovieByIdVariables, SearchMovieData, SearchMovieVariables } from '../';
 import { ConnectorConfig, DataConnect, QueryRef, QueryPromise, MutationRef, MutationPromise} from '@angular/fire/data-connect';
 import { CreateQueryResult, CreateMutationResult} from '@tanstack/angular-query-experimental';
 import { CreateDataConnectQueryResult, CreateDataConnectQueryOptions, CreateDataConnectMutationResult, DataConnectMutationOptionsUndefinedMutationFn } from '@tanstack-query-firebase/angular/data-connect';
@@ -11,8 +11,8 @@ export function injectCreateMovie(options?: CreateMovieOptions, injector?: Injec
 type UpsertUserOptions = DataConnectMutationOptionsUndefinedMutationFn<UpsertUserData, FirebaseError, UpsertUserVariables>;
 export function injectUpsertUser(options?: UpsertUserOptions, injector?: Injector): CreateDataConnectMutationResult<UpsertUserData, UpsertUserVariables, UpsertUserVariables>;
 
-type AddReviewOptions = DataConnectMutationOptionsUndefinedMutationFn<AddReviewData, FirebaseError, AddReviewVariables>;
-export function injectAddReview(options?: AddReviewOptions, injector?: Injector): CreateDataConnectMutationResult<AddReviewData, AddReviewVariables, AddReviewVariables>;
+type UpsertReviewOptions = DataConnectMutationOptionsUndefinedMutationFn<UpsertReviewData, FirebaseError, UpsertReviewVariables>;
+export function injectUpsertReview(options?: UpsertReviewOptions, injector?: Injector): CreateDataConnectMutationResult<UpsertReviewData, UpsertReviewVariables, UpsertReviewVariables>;
 
 type DeleteReviewOptions = DataConnectMutationOptionsUndefinedMutationFn<DeleteReviewData, FirebaseError, DeleteReviewVariables>;
 export function injectDeleteReview(options?: DeleteReviewOptions, injector?: Injector): CreateDataConnectMutationResult<DeleteReviewData, DeleteReviewVariables, DeleteReviewVariables>;

@@ -1,5 +1,11 @@
 const { queryRef, executeQuery, mutationRef, executeMutation, validateArgs } = require('firebase/data-connect');
 
+const UserRole = {
+  ADMIN: "ADMIN",
+  STANDARD: "STANDARD",
+}
+exports.UserRole = UserRole;
+
 const connectorConfig = {
   connector: 'connector',
   service: 'data-connect-demo',
@@ -31,16 +37,16 @@ exports.upsertUser = function upsertUser(dcOrVars, vars) {
   return executeMutation(upsertUserRef(dcOrVars, vars));
 };
 
-const addReviewRef = (dcOrVars, vars) => {
+const upsertReviewRef = (dcOrVars, vars) => {
   const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
   dcInstance._useGeneratedSdk();
-  return mutationRef(dcInstance, 'AddReview', inputVars);
+  return mutationRef(dcInstance, 'UpsertReview', inputVars);
 }
-addReviewRef.operationName = 'AddReview';
-exports.addReviewRef = addReviewRef;
+upsertReviewRef.operationName = 'UpsertReview';
+exports.upsertReviewRef = upsertReviewRef;
 
-exports.addReview = function addReview(dcOrVars, vars) {
-  return executeMutation(addReviewRef(dcOrVars, vars));
+exports.upsertReview = function upsertReview(dcOrVars, vars) {
+  return executeMutation(upsertReviewRef(dcOrVars, vars));
 };
 
 const deleteReviewRef = (dcOrVars, vars) => {

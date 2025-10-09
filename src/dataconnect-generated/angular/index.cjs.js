@@ -1,4 +1,4 @@
-const { createMovieRef, upsertUserRef, addReviewRef, deleteReviewRef, listMoviesRef, listUsersRef, listUserReviewsRef, getMovieByIdRef, searchMovieRef } = require('../');
+const { createMovieRef, upsertUserRef, upsertReviewRef, deleteReviewRef, listMoviesRef, listUsersRef, listUserReviewsRef, getMovieByIdRef, searchMovieRef } = require('../');
 const { DataConnect, CallerSdkTypeEnum } = require('@angular/fire/data-connect');
 const { injectDataConnectQuery, injectDataConnectMutation } = require('@tanstack-query-firebase/angular/data-connect');
 const { inject, EnvironmentInjector } = require('@angular/core');
@@ -11,8 +11,8 @@ exports.injectUpsertUser = function injectUpsertUser(args, injector) {
   return injectDataConnectMutation(upsertUserRef, args, injector, CallerSdkTypeEnum.GeneratedAngular);
 }
 
-exports.injectAddReview = function injectAddReview(args, injector) {
-  return injectDataConnectMutation(addReviewRef, args, injector, CallerSdkTypeEnum.GeneratedAngular);
+exports.injectUpsertReview = function injectUpsertReview(args, injector) {
+  return injectDataConnectMutation(upsertReviewRef, args, injector, CallerSdkTypeEnum.GeneratedAngular);
 }
 
 exports.injectDeleteReview = function injectDeleteReview(args, injector) {

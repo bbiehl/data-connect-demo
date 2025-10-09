@@ -8,17 +8,12 @@ export type Int64String = string;
 export type DateString = string;
 
 
+export enum UserRole {
+  ADMIN = "ADMIN",
+  STANDARD = "STANDARD",
+};
 
 
-export interface AddReviewData {
-  review_upsert: Review_Key;
-}
-
-export interface AddReviewVariables {
-  movieId: UUIDString;
-  rating: number;
-  reviewText: string;
-}
 
 export interface CreateMovieData {
   movie_insert: Movie_Key;
@@ -94,6 +89,8 @@ export interface ListUsersData {
   users: ({
     id: string;
     username: string;
+    email: string;
+    role: UserRole;
   } & User_Key)[];
 }
 
@@ -127,12 +124,23 @@ export interface SearchMovieVariables {
   genre?: string | null;
 }
 
+export interface UpsertReviewData {
+  review_upsert: Review_Key;
+}
+
+export interface UpsertReviewVariables {
+  movieId: UUIDString;
+  rating: number;
+  reviewText: string;
+}
+
 export interface UpsertUserData {
   user_upsert: User_Key;
 }
 
 export interface UpsertUserVariables {
   username: string;
+  email: string;
 }
 
 export interface User_Key {
@@ -164,17 +172,17 @@ export const upsertUserRef: UpsertUserRef;
 export function upsertUser(vars: UpsertUserVariables): MutationPromise<UpsertUserData, UpsertUserVariables>;
 export function upsertUser(dc: DataConnect, vars: UpsertUserVariables): MutationPromise<UpsertUserData, UpsertUserVariables>;
 
-interface AddReviewRef {
+interface UpsertReviewRef {
   /* Allow users to create refs without passing in DataConnect */
-  (vars: AddReviewVariables): MutationRef<AddReviewData, AddReviewVariables>;
+  (vars: UpsertReviewVariables): MutationRef<UpsertReviewData, UpsertReviewVariables>;
   /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect, vars: AddReviewVariables): MutationRef<AddReviewData, AddReviewVariables>;
+  (dc: DataConnect, vars: UpsertReviewVariables): MutationRef<UpsertReviewData, UpsertReviewVariables>;
   operationName: string;
 }
-export const addReviewRef: AddReviewRef;
+export const upsertReviewRef: UpsertReviewRef;
 
-export function addReview(vars: AddReviewVariables): MutationPromise<AddReviewData, AddReviewVariables>;
-export function addReview(dc: DataConnect, vars: AddReviewVariables): MutationPromise<AddReviewData, AddReviewVariables>;
+export function upsertReview(vars: UpsertReviewVariables): MutationPromise<UpsertReviewData, UpsertReviewVariables>;
+export function upsertReview(dc: DataConnect, vars: UpsertReviewVariables): MutationPromise<UpsertReviewData, UpsertReviewVariables>;
 
 interface DeleteReviewRef {
   /* Allow users to create refs without passing in DataConnect */
