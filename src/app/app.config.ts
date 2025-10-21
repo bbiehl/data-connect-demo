@@ -9,11 +9,11 @@ import { getDataConnect, provideDataConnect } from '@angular/fire/data-connect';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
 import { connectorConfig } from '@dataconnect/generated';
-import { provideTanStackQuery, QueryClient } from '@tanstack/angular-query-experimental';
+import { provideQueryClient, provideTanStackQuery, QueryClient } from '@tanstack/angular-query-experimental';
 import { routes } from './app.routes';
 import { environment } from './environments/environment';
 
-const queryClient = new QueryClient();
+// const queryClient = new QueryClient();
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -23,11 +23,13 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(withEventReplay()),
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideAnalytics(() => getAnalytics()),
-    provideTanStackQuery(queryClient),
-    provideDataConnect(() => {
-      const dataConnect = getDataConnect(connectorConfig);
-      // connectDataConnectEmulator(dataConnect, 'localhost', 9399);
-      return dataConnect;
-    }),
+    provideQueryClient(new QueryClient()),
+    provideDataConnect(() => getDataConnect(connectorConfig)),
+    // provideTanStackQuery(queryClient),
+    // provideDataConnect(() => {
+    //   const dataConnect = getDataConnect(connectorConfig);
+    //   // connectDataConnectEmulator(dataConnect, 'localhost', 9399);
+    //   return dataConnect;
+    // }),
   ],
 };
