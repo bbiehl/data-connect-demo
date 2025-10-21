@@ -1035,9 +1035,17 @@ input UserRole_Filter {
   """
   eq: UserRole
   """
+  ✨ `_expr` server value variant of `eq` (Match if field is exactly equal to provided value.)
+  """
+  eq_expr: UserRole_Expr
+  """
   Match if field is not equal to provided value.
   """
   ne: UserRole
+  """
+  ✨ `_expr` server value variant of `ne` (Match if field is not equal to provided value.)
+  """
+  ne_expr: UserRole_Expr
   """
   When true, match if field `IS NULL`. When false, match if field is `NOT NULL`.
   """
@@ -1055,17 +1063,33 @@ input UserRole_Filter {
   """
   gt: UserRole
   """
+  ✨ `_expr` server value variant of `gt` (Match if field value is greater than the provided value, based on index ordering of supported enum values.)
+  """
+  gt_expr: UserRole_Expr
+  """
   Match if field is greater than or equal to the provided value.
   """
   ge: UserRole
+  """
+  ✨ `_expr` server value variant of `ge` (Match if field is greater than or equal to the provided value.)
+  """
+  ge_expr: UserRole_Expr
   """
   Match if field value is less than the provided value, based on index ordering of supported enum values.
   """
   lt: UserRole
   """
+  ✨ `_expr` server value variant of `lt` (Match if field value is less than the provided value, based on index ordering of supported enum values.)
+  """
+  lt_expr: UserRole_Expr
+  """
   Match if field is less than or equal to the provided value, based on index ordering of supported enum values.
   """
   le: UserRole
+  """
+  ✨ `_expr` server value variant of `le` (Match if field is less than or equal to the provided value, based on index ordering of supported enum values.)
+  """
+  le_expr: UserRole_Expr
 }
 """
 ✨ Generated list filter input type for table 'UserRole'. This input applies filtering logic based on the count or existence of related objects that matches certain criteria.
@@ -1076,6 +1100,10 @@ input UserRole_ListFilter {
   """
   includes: UserRole
   """
+  ✨ `_expr` server value variant of `includes` (Match if list field contains the provided value as a member.)
+  """
+  includes_expr: UserRole_Expr
+  """
   Match if list field contains all of the provided values as members.
   """
   includesAll: [UserRole!]
@@ -1083,6 +1111,10 @@ input UserRole_ListFilter {
   Match if list field does not contain the provided value as a member.
   """
   excludes: UserRole
+  """
+  ✨ `_expr` server value variant of `excludes` (Match if list field does not contain the provided value as a member.)
+  """
+  excludes_expr: UserRole_Expr
   """
   Match if list field does not contain any of the provided values as members.
   """
