@@ -6,7 +6,7 @@ type User @table {
   id: String! @default(expr: "auth.uid")
   email: String! @col(dataType: "varchar(100)")
   username: String! @col(dataType: "varchar(50)")
-  role: UserRole! @default(value: STANDARD)
+  role: UserRole! @default(value: BASIC)
   # The `user: User!` field in the Review table generates the following one-to-many query field.
   #  reviews_on_user: [Review!]!
   # The `Review` join table the following many-to-many query field.
@@ -16,7 +16,7 @@ type User @table {
 # Enum for types of user roles
 enum UserRole {
   ADMIN
-  STANDARD
+  BASIC
 }
 
 # Movie is keyed by a randomly generated UUID.

@@ -10,7 +10,7 @@ export type DateString = string;
 
 export enum UserRole {
   ADMIN = "ADMIN",
-  STANDARD = "STANDARD",
+  BASIC = "BASIC",
 };
 
 

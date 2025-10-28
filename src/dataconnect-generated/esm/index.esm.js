@@ -2,7 +2,7 @@ import { queryRef, executeQuery, mutationRef, executeMutation, validateArgs } fr
 
 export const UserRole = {
   ADMIN: "ADMIN",
-  STANDARD: "STANDARD",
+  BASIC: "BASIC",
 }
 
 export const connectorConfig = {

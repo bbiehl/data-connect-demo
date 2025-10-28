@@ -2,7 +2,7 @@ const { queryRef, executeQuery, mutationRef, executeMutation, validateArgs } = r
 
 const UserRole = {
   ADMIN: "ADMIN",
-  STANDARD: "STANDARD",
+  BASIC: "BASIC",
 }
 exports.UserRole = UserRole;
 
