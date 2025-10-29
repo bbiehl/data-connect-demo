@@ -18,7 +18,7 @@ This README will guide you through the process of using the generated JavaScript
 - [**Mutations**](#mutations)
   - [*CreateMovie*](#createmovie)
   - [*UpsertUser*](#upsertuser)
-  - [*AddReview*](#addreview)
+  - [*UpsertReview*](#upsertreview)
   - [*DeleteReview*](#deletereview)
 
 # Accessing the connector
@@ -202,6 +202,8 @@ export interface ListUsersData {
   users: ({
     id: string;
     username: string;
+    email: string;
+    role: UserRole;
   } & User_Key)[];
 }
 ```
@@ -773,6 +775,7 @@ The `UpsertUser` mutation requires an argument of type `UpsertUserVariables`, wh
 ```typescript
 export interface UpsertUserVariables {
   username: string;
+  email: string;
 }
 ```
 ### Return Type
@@ -793,13 +796,14 @@ import { connectorConfig, upsertUser, UpsertUserVariables } from '@dataconnect/g
 // The `UpsertUser` mutation requires an argument of type `UpsertUserVariables`:
 const upsertUserVars: UpsertUserVariables = {
   username: ..., 
+  email: ..., 
 };
 
 // Call the `upsertUser()` function to execute the mutation.
 // You can use the `await` keyword to wait for the promise to resolve.
 const { data } = await upsertUser(upsertUserVars);
 // Variables can be defined inline as well.
-const { data } = await upsertUser({ username: ..., });
+const { data } = await upsertUser({ username: ..., email: ..., });
 
 // You can also pass in a `DataConnect` instance to the action shortcut function.
 const dataConnect = getDataConnect(connectorConfig);
@@ -823,12 +827,13 @@ import { connectorConfig, upsertUserRef, UpsertUserVariables } from '@dataconnec
 // The `UpsertUser` mutation requires an argument of type `UpsertUserVariables`:
 const upsertUserVars: UpsertUserVariables = {
   username: ..., 
+  email: ..., 
 };
 
 // Call the `upsertUserRef()` function to get a reference to the mutation.
 const ref = upsertUserRef(upsertUserVars);
 // Variables can be defined inline as well.
-const ref = upsertUserRef({ username: ..., });
+const ref = upsertUserRef({ username: ..., email: ..., });
 
 // You can also pass in a `DataConnect` instance to the `MutationRef` function.
 const dataConnect = getDataConnect(connectorConfig);
@@ -847,107 +852,107 @@ executeMutation(ref).then((response) => {
 });
 ```
 
-## AddReview
-You can execute the `AddReview` mutation using the following action shortcut function, or by calling `executeMutation()` after calling the following `MutationRef` function, both of which are defined in [dataconnect-generated/index.d.ts](./index.d.ts):
+## UpsertReview
+You can execute the `UpsertReview` mutation using the following action shortcut function, or by calling `executeMutation()` after calling the following `MutationRef` function, both of which are defined in [dataconnect-generated/index.d.ts](./index.d.ts):
 ```typescript
-addReview(vars: AddReviewVariables): MutationPromise<AddReviewData, AddReviewVariables>;
+upsertReview(vars: UpsertReviewVariables): MutationPromise<UpsertReviewData, UpsertReviewVariables>;
 
-interface AddReviewRef {
+interface UpsertReviewRef {
   ...
   /* Allow users to create refs without passing in DataConnect */
-  (vars: AddReviewVariables): MutationRef<AddReviewData, AddReviewVariables>;
+  (vars: UpsertReviewVariables): MutationRef<UpsertReviewData, UpsertReviewVariables>;
 }
-export const addReviewRef: AddReviewRef;
+export const upsertReviewRef: UpsertReviewRef;
 ```
 You can also pass in a `DataConnect` instance to the action shortcut function or `MutationRef` function.
 ```typescript
-addReview(dc: DataConnect, vars: AddReviewVariables): MutationPromise<AddReviewData, AddReviewVariables>;
+upsertReview(dc: DataConnect, vars: UpsertReviewVariables): MutationPromise<UpsertReviewData, UpsertReviewVariables>;
 
-interface AddReviewRef {
+interface UpsertReviewRef {
   ...
-  (dc: DataConnect, vars: AddReviewVariables): MutationRef<AddReviewData, AddReviewVariables>;
+  (dc: DataConnect, vars: UpsertReviewVariables): MutationRef<UpsertReviewData, UpsertReviewVariables>;
 }
-export const addReviewRef: AddReviewRef;
+export const upsertReviewRef: UpsertReviewRef;
 ```
 
-If you need the name of the operation without creating a ref, you can retrieve the operation name by calling the `operationName` property on the addReviewRef:
+If you need the name of the operation without creating a ref, you can retrieve the operation name by calling the `operationName` property on the upsertReviewRef:
 ```typescript
-const name = addReviewRef.operationName;
+const name = upsertReviewRef.operationName;
 console.log(name);
 ```
 
 ### Variables
-The `AddReview` mutation requires an argument of type `AddReviewVariables`, which is defined in [dataconnect-generated/index.d.ts](./index.d.ts). It has the following fields:
+The `UpsertReview` mutation requires an argument of type `UpsertReviewVariables`, which is defined in [dataconnect-generated/index.d.ts](./index.d.ts). It has the following fields:
 
 ```typescript
-export interface AddReviewVariables {
+export interface UpsertReviewVariables {
   movieId: UUIDString;
   rating: number;
   reviewText: string;
 }
 ```
 ### Return Type
-Recall that executing the `AddReview` mutation returns a `MutationPromise` that resolves to an object with a `data` property.
+Recall that executing the `UpsertReview` mutation returns a `MutationPromise` that resolves to an object with a `data` property.
 
-The `data` property is an object of type `AddReviewData`, which is defined in [dataconnect-generated/index.d.ts](./index.d.ts). It has the following fields:
+The `data` property is an object of type `UpsertReviewData`, which is defined in [dataconnect-generated/index.d.ts](./index.d.ts). It has the following fields:
 ```typescript
-export interface AddReviewData {
+export interface UpsertReviewData {
   review_upsert: Review_Key;
 }
 ```
-### Using `AddReview`'s action shortcut function
+### Using `UpsertReview`'s action shortcut function
 
 ```typescript
 import { getDataConnect } from 'firebase/data-connect';
-import { connectorConfig, addReview, AddReviewVariables } from '@dataconnect/generated';
+import { connectorConfig, upsertReview, UpsertReviewVariables } from '@dataconnect/generated';
 
-// The `AddReview` mutation requires an argument of type `AddReviewVariables`:
-const addReviewVars: AddReviewVariables = {
+// The `UpsertReview` mutation requires an argument of type `UpsertReviewVariables`:
+const upsertReviewVars: UpsertReviewVariables = {
   movieId: ..., 
   rating: ..., 
   reviewText: ..., 
 };
 
-// Call the `addReview()` function to execute the mutation.
+// Call the `upsertReview()` function to execute the mutation.
 // You can use the `await` keyword to wait for the promise to resolve.
-const { data } = await addReview(addReviewVars);
+const { data } = await upsertReview(upsertReviewVars);
 // Variables can be defined inline as well.
-const { data } = await addReview({ movieId: ..., rating: ..., reviewText: ..., });
+const { data } = await upsertReview({ movieId: ..., rating: ..., reviewText: ..., });
 
 // You can also pass in a `DataConnect` instance to the action shortcut function.
 const dataConnect = getDataConnect(connectorConfig);
-const { data } = await addReview(dataConnect, addReviewVars);
+const { data } = await upsertReview(dataConnect, upsertReviewVars);
 
 console.log(data.review_upsert);
 
 // Or, you can use the `Promise` API.
-addReview(addReviewVars).then((response) => {
+upsertReview(upsertReviewVars).then((response) => {
   const data = response.data;
   console.log(data.review_upsert);
 });
 ```
 
-### Using `AddReview`'s `MutationRef` function
+### Using `UpsertReview`'s `MutationRef` function
 
 ```typescript
 import { getDataConnect, executeMutation } from 'firebase/data-connect';
-import { connectorConfig, addReviewRef, AddReviewVariables } from '@dataconnect/generated';
+import { connectorConfig, upsertReviewRef, UpsertReviewVariables } from '@dataconnect/generated';
 
-// The `AddReview` mutation requires an argument of type `AddReviewVariables`:
-const addReviewVars: AddReviewVariables = {
+// The `UpsertReview` mutation requires an argument of type `UpsertReviewVariables`:
+const upsertReviewVars: UpsertReviewVariables = {
   movieId: ..., 
   rating: ..., 
   reviewText: ..., 
 };
 
-// Call the `addReviewRef()` function to get a reference to the mutation.
-const ref = addReviewRef(addReviewVars);
+// Call the `upsertReviewRef()` function to get a reference to the mutation.
+const ref = upsertReviewRef(upsertReviewVars);
 // Variables can be defined inline as well.
-const ref = addReviewRef({ movieId: ..., rating: ..., reviewText: ..., });
+const ref = upsertReviewRef({ movieId: ..., rating: ..., reviewText: ..., });
 
 // You can also pass in a `DataConnect` instance to the `MutationRef` function.
 const dataConnect = getDataConnect(connectorConfig);
-const ref = addReviewRef(dataConnect, addReviewVars);
+const ref = upsertReviewRef(dataConnect, upsertReviewVars);
 
 // Call `executeMutation()` on the reference to execute the mutation.
 // You can use the `await` keyword to wait for the promise to resolve.

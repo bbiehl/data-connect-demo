@@ -5,7 +5,7 @@
 /tmp
 /out-tsc
 /bazel-out
-/dataconnect/.dataconnect
+/dataconnect/.dataconnect/pgliteData
 *.log
 
 # Node
