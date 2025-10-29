@@ -9,11 +9,9 @@ import { getDataConnect, provideDataConnect } from '@angular/fire/data-connect';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
 import { connectorConfig } from '@dataconnect/generated';
-import { provideQueryClient, provideTanStackQuery, QueryClient } from '@tanstack/angular-query-experimental';
+import { provideQueryClient, QueryClient } from '@tanstack/angular-query-experimental';
 import { routes } from './app.routes';
 import { environment } from './environments/environment';
-
-// const queryClient = new QueryClient();
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -25,11 +23,5 @@ export const appConfig: ApplicationConfig = {
     provideAnalytics(() => getAnalytics()),
     provideQueryClient(new QueryClient()),
     provideDataConnect(() => getDataConnect(connectorConfig)),
-    // provideTanStackQuery(queryClient),
-    // provideDataConnect(() => {
-    //   const dataConnect = getDataConnect(connectorConfig);
-    //   // connectDataConnectEmulator(dataConnect, 'localhost', 9399);
-    //   return dataConnect;
-    // }),
   ],
 };
