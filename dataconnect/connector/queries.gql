@@ -16,6 +16,8 @@ query ListUsers @auth(level: NO_ACCESS) {
   users {
     id
     username
+    email
+    role
   }
 }
 

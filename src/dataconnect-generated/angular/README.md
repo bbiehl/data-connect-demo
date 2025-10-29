@@ -24,7 +24,7 @@ You can also follow the instructions from the [Data Connect documentation](https
 - [**Mutations**](#mutations)
   - [*CreateMovie*](#createmovie)
   - [*UpsertUser*](#upsertuser)
-  - [*AddReview*](#addreview)
+  - [*UpsertReview*](#upsertreview)
   - [*DeleteReview*](#deletereview)
 
 # TanStack Query Firebase & TanStack Angular Query
@@ -202,6 +202,8 @@ export interface ListUsersData {
   users: ({
     id: string;
     username: string;
+    email: string;
+    role: UserRole;
   } & User_Key)[];
 }
 ```
@@ -653,6 +655,7 @@ The `UpsertUser` Mutation requires an argument of type `UpsertUserVariables`, wh
 ```javascript
 export interface UpsertUserVariables {
   username: string;
+  email: string;
 }
 ```
 ### Return Type
@@ -724,10 +727,11 @@ export class MyComponent {
     // The `UpsertUser` Mutation requires an argument of type `UpsertUserVariables`:
     const upsertUserVars: UpsertUserVariables = {
       username: ..., 
+      email: ..., 
     };
     this.mutation.mutate(upsertUserVars);
     // Variables can be defined inline as well.
-    this.mutation.mutate({ username: ..., });
+    this.mutation.mutate({ username: ..., email: ..., });
 
     // You can call `CreateDataConnectMutationResult.mutateAsync()` to execute the Mutation and return a promise with the data returned from the Mutation.
     this.mutation.mutateAsync(upsertUserVars);
@@ -738,32 +742,32 @@ export class MyComponent {
 }
 ```
 
-## AddReview
-You can execute the `AddReview` Mutation using the `CreateDataConnectMutationResult` object returned by the following Mutation injector (which is defined in [dataconnect-generated/angular/index.d.ts](./index.d.ts)):
+## UpsertReview
+You can execute the `UpsertReview` Mutation using the `CreateDataConnectMutationResult` object returned by the following Mutation injector (which is defined in [dataconnect-generated/angular/index.d.ts](./index.d.ts)):
 ```javascript
-injectAddReview(options?: AddReviewOptions, injector?: Injector): CreateDataConnectMutationResult<AddReviewData, AddReviewVariables, AddReviewVariables>;
+injectUpsertReview(options?: UpsertReviewOptions, injector?: Injector): CreateDataConnectMutationResult<UpsertReviewData, UpsertReviewVariables, UpsertReviewVariables>;
 ```
 
 ### Variables
-The `AddReview` Mutation requires an argument of type `AddReviewVariables`, which is defined in [dataconnect-generated/index.d.ts](../index.d.ts). It has the following fields:
+The `UpsertReview` Mutation requires an argument of type `UpsertReviewVariables`, which is defined in [dataconnect-generated/index.d.ts](../index.d.ts). It has the following fields:
 
 ```javascript
-export interface AddReviewVariables {
+export interface UpsertReviewVariables {
   movieId: UUIDString;
   rating: number;
   reviewText: string;
 }
 ```
 ### Return Type
-Recall that calling the `AddReview` Mutation injector returns a `CreateDataConnectMutationResult` object. This object holds the state of your Mutation, including whether the Mutation is loading, has completed, or has succeeded/failed, among other things.
+Recall that calling the `UpsertReview` Mutation injector returns a `CreateDataConnectMutationResult` object. This object holds the state of your Mutation, including whether the Mutation is loading, has completed, or has succeeded/failed, among other things.
 
 To check the status of a Mutation, use the `CreateDataConnectMutationResult.status()` function. You can also check for pending / success / error status using the `CreateDataConnectMutationResult.isPending()`, `CreateDataConnectMutationResult.isSuccess()`, and `CreateDataConnectMutationResult.isError()` functions.
 
 To execute the Mutation, call `CreateDataConnectMutationResult.mutate()`. This function executes the Mutation, but does not return the data from the Mutation. 
 
-To access the data returned by a Mutation, use the `CreateDataConnectMutationResult.data()` function. The data for the `AddReview` Mutation is of type `AddReviewData`, which is defined in [dataconnect-generated/index.d.ts](../index.d.ts). It has the following fields:
+To access the data returned by a Mutation, use the `CreateDataConnectMutationResult.data()` function. The data for the `UpsertReview` Mutation is of type `UpsertReviewData`, which is defined in [dataconnect-generated/index.d.ts](../index.d.ts). It has the following fields:
 ```javascript
-export interface AddReviewData {
+export interface UpsertReviewData {
   review_upsert: Review_Key;
 }
 ```
@@ -772,12 +776,12 @@ You can also call `CreateDataConnectMutationResult.mutateAsync()`, which execute
 
 To learn more about the `CreateDataConnectMutationResult` object, see the [TanStack Query Firebase documentation](https://docs.page/invertase/tanstack-query-firebase/angular/data-connect/functions/injectDataConnectMutation) and the [TanStack Angular Query documentation](https://tanstack.com/query/v5/docs/framework/angular/reference/functions/injectmutation).
 
-### Using `AddReview`'s Mutation injector
+### Using `UpsertReview`'s Mutation injector
 
 ```javascript
 ... // other imports
-import { connectorConfig, AddReviewVariables } from '@dataconnect/generated';
-import { injectAddReview, AddReviewOptions } from '@dataconnect/generated/angular'
+import { connectorConfig, UpsertReviewVariables } from '@dataconnect/generated';
+import { injectUpsertReview, UpsertReviewOptions } from '@dataconnect/generated/angular'
 import { DataConnect } from '@angular/fire/data-connect';
 import { initializeApp } from '@angular/fire/app';
 
@@ -808,33 +812,33 @@ import { initializeApp } from '@angular/fire/app';
 })
 export class MyComponent {
   // Call the Mutation injector function to get a `CreateDataConnectMutationResult` object which holds the state of your Mutation.
-  mutation = injectAddReview();
+  mutation = injectUpsertReview();
 
-  // You can also pass in a `AddReviewOptions` function (not object) to the Mutation injector function.
-  options: AddReviewOptions = () => {
+  // You can also pass in a `UpsertReviewOptions` function (not object) to the Mutation injector function.
+  options: UpsertReviewOptions = () => {
     return {
       onSuccess: () => { console.log('Mutation succeeded!'); }
     };
   };
-  mutation = injectAddReview(this.options);
+  mutation = injectUpsertReview(this.options);
 
   // After calling the Mutation injector function, you must call `CreateDataConnectMutationResult.mutate()` to execute the Mutation.
   executeMutation() {
-    // The `AddReview` Mutation requires an argument of type `AddReviewVariables`:
-    const addReviewVars: AddReviewVariables = {
+    // The `UpsertReview` Mutation requires an argument of type `UpsertReviewVariables`:
+    const upsertReviewVars: UpsertReviewVariables = {
       movieId: ..., 
       rating: ..., 
       reviewText: ..., 
     };
-    this.mutation.mutate(addReviewVars);
+    this.mutation.mutate(upsertReviewVars);
     // Variables can be defined inline as well.
     this.mutation.mutate({ movieId: ..., rating: ..., reviewText: ..., });
 
     // You can call `CreateDataConnectMutationResult.mutateAsync()` to execute the Mutation and return a promise with the data returned from the Mutation.
-    this.mutation.mutateAsync(addReviewVars);
+    this.mutation.mutateAsync(upsertReviewVars);
 
-    // You can also pass in a `AddReviewOptions` object (not function) to `CreateDataConnectMutationResult.mutate()`.
-    this.mutation.mutate(addReviewVars, this.options());
+    // You can also pass in a `UpsertReviewOptions` object (not function) to `CreateDataConnectMutationResult.mutate()`.
+    this.mutation.mutate(upsertReviewVars, this.options());
   }
 }
 ```
