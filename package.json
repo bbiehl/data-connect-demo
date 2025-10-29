@@ -33,7 +33,6 @@
     "@angular/router": "^20.3.6",
     "@angular/ssr": "^20.3.6",
     "@dataconnect/generated": "file:src/dataconnect-generated",
-    "@tanstack-query-firebase/angular": "^1.0.2",
     "express": "^5.1.0",
     "firebase": "^12.2.1",
     "rxjs": "~7.8.0",
