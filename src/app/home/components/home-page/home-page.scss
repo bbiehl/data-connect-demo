@@ -1,0 +1,27 @@
+.home-page {
+  padding: 20px;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+.search-form-field {
+  width: 100%;
+}
+
+.movie-list {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.movie-card {
+  width: 200px;
+}
