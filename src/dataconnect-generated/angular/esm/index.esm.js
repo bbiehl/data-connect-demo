@@ -1,23 +1,7 @@
-import { createMovieRef, upsertUserRef, upsertReviewRef, deleteReviewRef, listMoviesRef, listUsersRef, listUserReviewsRef, getMovieByIdRef, searchMovieRef } from '../../';
+import { listMoviesRef, listUsersRef, listUserReviewsRef, getMovieByIdRef, searchMovieRef, createMovieRef, upsertUserRef, upsertReviewRef, deleteReviewRef } from '../../';
 import { DataConnect, CallerSdkTypeEnum } from '@angular/fire/data-connect';
 import { injectDataConnectQuery, injectDataConnectMutation } from '@tanstack-query-firebase/angular/data-connect';
 import { inject, EnvironmentInjector } from '@angular/core';
-export function injectCreateMovie(args, injector) {
-  return injectDataConnectMutation(createMovieRef, args, injector, CallerSdkTypeEnum.GeneratedAngular);
-}
-
-export function injectUpsertUser(args, injector) {
-  return injectDataConnectMutation(upsertUserRef, args, injector, CallerSdkTypeEnum.GeneratedAngular);
-}
-
-export function injectUpsertReview(args, injector) {
-  return injectDataConnectMutation(upsertReviewRef, args, injector, CallerSdkTypeEnum.GeneratedAngular);
-}
-
-export function injectDeleteReview(args, injector) {
-  return injectDataConnectMutation(deleteReviewRef, args, injector, CallerSdkTypeEnum.GeneratedAngular);
-}
-
 export function injectListMovies(options, injector) {
   const finalInjector = injector || inject(EnvironmentInjector);
   const dc = finalInjector.get(DataConnect);
@@ -78,5 +62,21 @@ export function injectSearchMovie(args, options, injector) {
       ...addOpn
     };
   }, finalInjector, CallerSdkTypeEnum.GeneratedAngular);
+}
+
+export function injectCreateMovie(args, injector) {
+  return injectDataConnectMutation(createMovieRef, args, injector, CallerSdkTypeEnum.GeneratedAngular);
+}
+
+export function injectUpsertUser(args, injector) {
+  return injectDataConnectMutation(upsertUserRef, args, injector, CallerSdkTypeEnum.GeneratedAngular);
+}
+
+export function injectUpsertReview(args, injector) {
+  return injectDataConnectMutation(upsertReviewRef, args, injector, CallerSdkTypeEnum.GeneratedAngular);
+}
+
+export function injectDeleteReview(args, injector) {
+  return injectDataConnectMutation(deleteReviewRef, args, injector, CallerSdkTypeEnum.GeneratedAngular);
 }
 
