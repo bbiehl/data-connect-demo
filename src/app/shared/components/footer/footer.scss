@@ -1,0 +1,20 @@
+@use '@angular/material' as mat;
+
+:host {
+  @include mat.toolbar-overrides(
+    (
+      container-background-color: var(--mat-sys-secondary),
+      container-text-color: var(--mat-sys-on-secondary),
+    )
+  );
+}
+
+.layout {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
