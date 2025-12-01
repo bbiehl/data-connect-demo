@@ -1,0 +1,38 @@
+@use '@angular/material' as mat;
+
+:host {
+  @include mat.toolbar-overrides(
+    (
+      container-background-color: var(--mat-sys-primary),
+      container-text-color: var(--mat-sys-on-primary),
+    )
+  );
+
+  @include mat.icon-button-overrides(
+    (
+      icon-color: var(--mat-sys-on-primary),
+    )
+  );
+}
+
+.layout {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-links {
+  @media (max-width: 600.01px) {
+    display: none;
+  }
+}
+
+.menu-button {
+  @media (min-width: 600.01px) {
+    display: none;
+  }
+}
