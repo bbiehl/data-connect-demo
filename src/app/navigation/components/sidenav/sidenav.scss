@@ -6,6 +6,32 @@
       container-background-color: var(--mat-sys-secondary-container),
     )
   );
+
+  @include mat.button-overrides(
+    (
+      filled-container-color: var(--mat-sys-secondary-container),
+      filled-label-text-color: var(--mat-sys-on-secondary-container),
+      filled-label-text-size: var(--mat-sys-title-large-size),
+    )
+  );
+
+  @include mat.icon-button-overrides(
+    (
+      icon-color: var(--mat-sys-on-secondary-container),
+      //   icon-size: var(--mat-sys-display-small-size),
+    )
+  );
+
+  @include mat.divider-overrides(
+    (
+      color: var(--mat-sys-on-secondary-container),
+    )
+  );
+
+  .active-link {
+    background-color: var(--mat-sys-secondary);
+    color: var(--mat-sys-on-secondary);
+  }
 }
 
 .mat-sidenav-container {
@@ -25,6 +51,31 @@
 
 .mat-sidenav {
   max-width: 300px;
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 1rem;
+    margin: 2rem 1rem 0 1rem;
+
+    nav {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .socials {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 1rem;
+    }
+  }
 }
 
 .mat-sidenav-content {
