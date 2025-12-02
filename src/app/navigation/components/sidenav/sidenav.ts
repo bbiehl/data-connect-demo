@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, inject, signal, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  signal,
+  ViewChild,
+} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
@@ -30,7 +37,7 @@ import { NavigationService } from '../../navigation.service';
   styleUrl: './sidenav.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Sidenav {
+export class Sidenav implements AfterViewInit {
   @ViewChild(MatSidenavContainer) sideNavContainer!: MatSidenavContainer;
   navigationService = inject(NavigationService);
   showBackToTopFab = signal(false);
