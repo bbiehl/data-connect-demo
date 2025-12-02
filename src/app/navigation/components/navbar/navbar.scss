@@ -8,11 +8,26 @@
     )
   );
 
+  @include mat.button-overrides(
+    (
+      filled-horizontal-padding: 0,
+    )
+  );
+
   @include mat.icon-button-overrides(
     (
       icon-color: var(--mat-sys-on-primary),
     )
   );
+
+  .active-link {
+    @include mat.button-overrides(
+      (
+        filled-container-color: var(--mat-sys-primary-container),
+        filled-label-text-color: var(--mat-sys-on-primary-container),
+      )
+    );
+  }
 }
 
 .mat-toolbar {
@@ -31,13 +46,20 @@
 }
 
 .nav-links {
-  @media (max-width: 600.01px) {
+  @media (min-width: 600.02px) {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  @media (max-width: 600.02px) {
     display: none;
   }
 }
 
 .menu-button {
-  @media (min-width: 600.01px) {
+  @media (min-width: 600.02px) {
     display: none;
   }
 }
