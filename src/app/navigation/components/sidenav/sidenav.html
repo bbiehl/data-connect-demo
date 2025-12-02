@@ -54,6 +54,13 @@
     </div>
   </mat-sidenav>
   <mat-sidenav-content>
+    @if (showBackToTopFab()) {
+    <div class="back-to-top-fab">
+      <button matFab aria-label="Back to top" (click)="scrollToTop()">
+        <mat-icon>arrow_upward</mat-icon>
+      </button>
+    </div>
+    }
     <router-outlet></router-outlet>
     <app-footer></app-footer>
   </mat-sidenav-content>
