@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { RouterModule } from '@angular/router';
 import { Footer } from '../../../shared/components/footer/footer';
+import { NavigationService } from '../../navigation.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -10,4 +11,6 @@ import { Footer } from '../../../shared/components/footer/footer';
   styleUrl: './sidenav.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Sidenav {}
+export class Sidenav {
+  navigationService = inject(NavigationService);
+}

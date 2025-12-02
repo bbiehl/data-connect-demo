@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { NavigationService } from '../../navigation.service';
 
 @Component({
   selector: 'app-navbar',
@@ -11,7 +12,5 @@ import { MatToolbarModule } from '@angular/material/toolbar';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Navbar {
-  handleMenuClick(): void {
-    console.log('Menu button clicked');
-  }
+  navigationService = inject(NavigationService);
 }

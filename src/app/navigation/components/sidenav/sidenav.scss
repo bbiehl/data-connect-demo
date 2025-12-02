@@ -3,7 +3,7 @@
 :host {
   @include mat.sidenav-overrides(
     (
-      container-background-color: orange,
+      container-background-color: var(--mat-sys-secondary-container),
       container-text-color: red,
     )
   );
@@ -20,4 +20,12 @@
   @media (min-width: 600.01px) {
     top: 64px;
   }
+}
+
+.mat-sidenav {
+  max-width: 300px;
+}
+
+.mat-sidenav-content {
+  height: 100%;
 }

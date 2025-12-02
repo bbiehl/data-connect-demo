@@ -8,8 +8,12 @@
     <a matButton routerLink="/contact" routerLinkActive="active-link">Contact</a>
   </div>
   <div class="menu-button">
-    <button matIconButton (click)="handleMenuClick()">
+    <button matIconButton (click)="navigationService.toggleSidenav()">
+      @if (navigationService.sidenavOpened()) {
+      <mat-icon>close</mat-icon>
+      } @else {
       <mat-icon>menu</mat-icon>
+      }
     </button>
   </div>
 </mat-toolbar>

@@ -1,4 +1,11 @@
 <mat-sidenav-container>
+  <mat-sidenav
+    autoFocus="false"
+    mode="over"
+    position="end"
+    [opened]="navigationService.sidenavOpened()"
+    (closed)="navigationService.closeSidenav()"
+  ></mat-sidenav>
   <mat-sidenav-content>
     <router-outlet></router-outlet>
     <app-footer></app-footer>
