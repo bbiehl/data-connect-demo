@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { RouterModule } from '@angular/router';
 import { Footer } from '../../../shared/components/footer/footer';
@@ -6,7 +7,7 @@ import { NavigationService } from '../../navigation.service';
 
 @Component({
   selector: 'app-sidenav',
-  imports: [MatSidenavModule, RouterModule, Footer],
+  imports: [MatListModule, MatSidenavModule, RouterModule, Footer],
   templateUrl: './sidenav.html',
   styleUrl: './sidenav.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
