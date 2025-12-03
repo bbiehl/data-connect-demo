@@ -1,0 +1,98 @@
+@use '@angular/material' as mat;
+
+.mat-sidenav-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  @media (max-width: 600.01px) {
+    top: 56px;
+  }
+
+  @media (min-width: 600.01px) {
+    top: 64px;
+  }
+}
+
+.mat-sidenav {
+  max-width: 300px;
+
+  @include mat.sidenav-overrides(
+    (
+      container-background-color: var(--mat-sys-secondary-container),
+    )
+  );
+
+  @include mat.button-overrides(
+    (
+      filled-container-color: var(--mat-sys-secondary-container),
+      filled-label-text-color: var(--mat-sys-on-secondary-container),
+      filled-label-text-size: var(--mat-sys-title-large-size),
+    )
+  );
+
+  @include mat.icon-button-overrides(
+    (
+      icon-color: var(--mat-sys-on-secondary-container),
+    )
+  );
+
+  @include mat.divider-overrides(
+    (
+      color: var(--mat-sys-on-secondary-container),
+    )
+  );
+
+  .active-link {
+    background-color: var(--mat-sys-secondary);
+    color: var(--mat-sys-on-secondary);
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 1rem;
+    margin: 2rem 1rem 0 1rem;
+
+    nav {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .socials {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+
+.mat-sidenav-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .back-to-top-fab {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 2;
+
+    button {
+      @include mat.fab-overrides(
+        (
+          container-color: var(--mat-sys-primary),
+          foreground-color: var(--mat-sys-on-primary),
+        )
+      );
+    }
+  }
+}

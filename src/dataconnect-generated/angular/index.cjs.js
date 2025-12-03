@@ -1,23 +1,7 @@
-const { createMovieRef, upsertUserRef, upsertReviewRef, deleteReviewRef, listMoviesRef, listUsersRef, listUserReviewsRef, getMovieByIdRef, searchMovieRef } = require('../');
+const { listMoviesRef, listUsersRef, listUserReviewsRef, getMovieByIdRef, searchMovieRef, createMovieRef, upsertUserRef, upsertReviewRef, deleteReviewRef } = require('../');
 const { DataConnect, CallerSdkTypeEnum } = require('@angular/fire/data-connect');
 const { injectDataConnectQuery, injectDataConnectMutation } = require('@tanstack-query-firebase/angular/data-connect');
 const { inject, EnvironmentInjector } = require('@angular/core');
-
-exports.injectCreateMovie = function injectCreateMovie(args, injector) {
-  return injectDataConnectMutation(createMovieRef, args, injector, CallerSdkTypeEnum.GeneratedAngular);
-}
-
-exports.injectUpsertUser = function injectUpsertUser(args, injector) {
-  return injectDataConnectMutation(upsertUserRef, args, injector, CallerSdkTypeEnum.GeneratedAngular);
-}
-
-exports.injectUpsertReview = function injectUpsertReview(args, injector) {
-  return injectDataConnectMutation(upsertReviewRef, args, injector, CallerSdkTypeEnum.GeneratedAngular);
-}
-
-exports.injectDeleteReview = function injectDeleteReview(args, injector) {
-  return injectDataConnectMutation(deleteReviewRef, args, injector, CallerSdkTypeEnum.GeneratedAngular);
-}
 
 exports.injectListMovies = function injectListMovies(options, injector) {
   const finalInjector = injector || inject(EnvironmentInjector);
@@ -79,5 +63,21 @@ exports.injectSearchMovie = function injectSearchMovie(args, options, injector) 
       ...addOpn
     };
   }, finalInjector, CallerSdkTypeEnum.GeneratedAngular);
+}
+
+exports.injectCreateMovie = function injectCreateMovie(args, injector) {
+  return injectDataConnectMutation(createMovieRef, args, injector, CallerSdkTypeEnum.GeneratedAngular);
+}
+
+exports.injectUpsertUser = function injectUpsertUser(args, injector) {
+  return injectDataConnectMutation(upsertUserRef, args, injector, CallerSdkTypeEnum.GeneratedAngular);
+}
+
+exports.injectUpsertReview = function injectUpsertReview(args, injector) {
+  return injectDataConnectMutation(upsertReviewRef, args, injector, CallerSdkTypeEnum.GeneratedAngular);
+}
+
+exports.injectDeleteReview = function injectDeleteReview(args, injector) {
+  return injectDataConnectMutation(deleteReviewRef, args, injector, CallerSdkTypeEnum.GeneratedAngular);
 }
 

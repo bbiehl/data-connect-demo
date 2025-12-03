@@ -1,0 +1,67 @@
+<mat-sidenav-container (backdropClick)="navigationService.closeSidenav()">
+  <mat-sidenav
+    autoFocus="false"
+    mode="over"
+    position="end"
+    [opened]="navigationService.sidenavOpened()"
+  >
+    <div class="container">
+      <nav>
+        <a
+          matButton="filled"
+          routerLink="/"
+          routerLinkActive="active-link"
+          (click)="navigationService.closeSidenav()"
+          >Home</a
+        >
+        <a
+          matButton="filled"
+          routerLink="/about"
+          routerLinkActive="active-link"
+          (click)="navigationService.closeSidenav()"
+          >About</a
+        >
+        <a
+          matButton="filled"
+          routerLink="/contact"
+          routerLinkActive="active-link"
+          (click)="navigationService.closeSidenav()"
+          >Contact</a
+        >
+      </nav>
+      <mat-divider></mat-divider>
+      <div class="socials">
+        <a
+          matIconButton
+          href="https://github.com/bbiehl/data-connect-demo"
+          target="_blank"
+          aria-label="GitHub"
+        >
+          <mat-icon svgIcon="github-icon"></mat-icon>
+        </a>
+        <a
+          matIconButton
+          href="https://www.linkedin.com/in/bradley-biehl/"
+          target="_blank"
+          aria-label="LinkedIn"
+        >
+          <mat-icon svgIcon="linkedin-icon"></mat-icon>
+        </a>
+        <a matIconButton href="https://x.com/bradley_biehl" target="_blank" aria-label="Twitter">
+          <mat-icon svgIcon="twitter-icon"></mat-icon>
+        </a>
+      </div>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    @if (showBackToTopFab()) {
+    <div class="back-to-top-fab">
+      <button matFab aria-label="Back to top" (click)="scrollToTop()">
+        <mat-icon>arrow_upward</mat-icon>
+      </button>
+    </div>
+    }
+    <router-outlet></router-outlet>
+    <app-footer></app-footer>
+  </mat-sidenav-content>
+</mat-sidenav-container>

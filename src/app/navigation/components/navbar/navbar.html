@@ -1,0 +1,38 @@
+<mat-toolbar>
+  <div class="layout">
+    <h1>Data Connect Demo</h1>
+  </div>
+  <div class="nav-links">
+    <a matButton="filled" routerLink="/" routerLinkActive="active-link">Home</a>
+    <a matButton="filled" routerLink="/about" routerLinkActive="active-link">About</a>
+    <a matButton="filled" routerLink="/contact" routerLinkActive="active-link">Contact</a>
+    <a
+      matIconButton
+      href="https://github.com/bbiehl/data-connect-demo"
+      target="_blank"
+      aria-label="GitHub"
+    >
+      <mat-icon svgIcon="github-icon"></mat-icon>
+    </a>
+    <a
+      matIconButton
+      href="https://www.linkedin.com/in/bradley-biehl/"
+      target="_blank"
+      aria-label="LinkedIn"
+    >
+      <mat-icon svgIcon="linkedin-icon"></mat-icon>
+    </a>
+    <a matIconButton href="https://x.com/bradley_biehl" target="_blank" aria-label="Twitter">
+      <mat-icon svgIcon="twitter-icon"></mat-icon>
+    </a>
+  </div>
+  <div class="menu-button">
+    <button matIconButton (click)="navigationService.toggleSidenav()">
+      @if (navigationService.sidenavOpened()) {
+      <mat-icon>close</mat-icon>
+      } @else {
+      <mat-icon>menu</mat-icon>
+      }
+    </button>
+  </div>
+</mat-toolbar>

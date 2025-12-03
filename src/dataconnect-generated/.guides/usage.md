@@ -11,7 +11,7 @@ The generated SDK creates injectable wrapper functions.
 
 Here's an example:
 ```
-import { injectCreateMovie, injectUpsertUser, injectUpsertReview, injectDeleteReview, injectListMovies, injectListUsers, injectListUserReviews, injectGetMovieById, injectSearchMovie } from '@dataconnect/generated/angular';
+import { injectListMovies, injectListUsers, injectListUserReviews, injectGetMovieById, injectSearchMovie, injectCreateMovie, injectUpsertUser, injectUpsertReview, injectDeleteReview } from '@dataconnect/generated/angular';
 
 @Component({
   selector: 'my-component',
@@ -19,15 +19,15 @@ import { injectCreateMovie, injectUpsertUser, injectUpsertReview, injectDeleteRe
 })
 class MyComponent {
   // The types of these injectors are available in angular/index.d.ts
-  private readonly CreateMovieOperation = injectCreateMovie(createMovieVars);
-  private readonly UpsertUserOperation = injectUpsertUser(upsertUserVars);
-  private readonly UpsertReviewOperation = injectUpsertReview(upsertReviewVars);
-  private readonly DeleteReviewOperation = injectDeleteReview(deleteReviewVars);
   private readonly ListMoviesOperation = injectListMovies();
   private readonly ListUsersOperation = injectListUsers();
   private readonly ListUserReviewsOperation = injectListUserReviews();
   private readonly GetMovieByIdOperation = injectGetMovieById(getMovieByIdVars);
   private readonly SearchMovieOperation = injectSearchMovie(searchMovieVars);
+  private readonly CreateMovieOperation = injectCreateMovie(createMovieVars);
+  private readonly UpsertUserOperation = injectUpsertUser(upsertUserVars);
+  private readonly UpsertReviewOperation = injectUpsertReview(upsertReviewVars);
+  private readonly DeleteReviewOperation = injectDeleteReview(deleteReviewVars);
   }
 ```
 
@@ -70,20 +70,8 @@ If a user is not using a supported framework, they can use the generated SDK dir
 Here's an example of how to use it with the first 5 operations:
 
 ```js
-import { createMovie, upsertUser, upsertReview, deleteReview, listMovies, listUsers, listUserReviews, getMovieById, searchMovie } from '@dataconnect/generated';
+import { listMovies, listUsers, listUserReviews, getMovieById, searchMovie, createMovie, upsertUser, upsertReview, deleteReview } from '@dataconnect/generated';
 
-
-// Operation CreateMovie:  For variables, look at type CreateMovieVars in ../index.d.ts
-const { data } = await CreateMovie(dataConnect, createMovieVars);
-
-// Operation UpsertUser:  For variables, look at type UpsertUserVars in ../index.d.ts
-const { data } = await UpsertUser(dataConnect, upsertUserVars);
-
-// Operation UpsertReview:  For variables, look at type UpsertReviewVars in ../index.d.ts
-const { data } = await UpsertReview(dataConnect, upsertReviewVars);
-
-// Operation DeleteReview:  For variables, look at type DeleteReviewVars in ../index.d.ts
-const { data } = await DeleteReview(dataConnect, deleteReviewVars);
 
 // Operation ListMovies: 
 const { data } = await ListMovies(dataConnect);
@@ -99,6 +87,18 @@ const { data } = await GetMovieById(dataConnect, getMovieByIdVars);
 
 // Operation SearchMovie:  For variables, look at type SearchMovieVars in ../index.d.ts
 const { data } = await SearchMovie(dataConnect, searchMovieVars);
+
+// Operation CreateMovie:  For variables, look at type CreateMovieVars in ../index.d.ts
+const { data } = await CreateMovie(dataConnect, createMovieVars);
+
+// Operation UpsertUser:  For variables, look at type UpsertUserVars in ../index.d.ts
+const { data } = await UpsertUser(dataConnect, upsertUserVars);
+
+// Operation UpsertReview:  For variables, look at type UpsertReviewVars in ../index.d.ts
+const { data } = await UpsertReview(dataConnect, upsertReviewVars);
+
+// Operation DeleteReview:  For variables, look at type DeleteReviewVars in ../index.d.ts
+const { data } = await DeleteReview(dataConnect, deleteReviewVars);
 
 
 ```
