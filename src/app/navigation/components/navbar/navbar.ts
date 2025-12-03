@@ -5,11 +5,12 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { DomSanitizer } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { GITHUB_ICON, LINKEDIN_ICON, TWITTER_ICON } from '../../../shared/constants/icons.const';
+import { Theme } from '../../../theme/components/theme/theme';
 import { NavigationService } from '../../navigation.service';
 
 @Component({
   selector: 'app-navbar',
-  imports: [MatButtonModule, MatIconModule, MatToolbarModule, RouterModule],
+  imports: [MatButtonModule, MatIconModule, MatToolbarModule, RouterModule, Theme],
   templateUrl: './navbar.html',
   styleUrl: './navbar.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

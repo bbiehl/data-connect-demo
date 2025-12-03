@@ -1,2 +1,4 @@
-<app-navbar></app-navbar>
-<app-sidenav></app-sidenav>
+<div [class.dark-mode]="themeService.isDarkMode()">
+  <app-navbar></app-navbar>
+  <app-sidenav></app-sidenav>
+</div>
