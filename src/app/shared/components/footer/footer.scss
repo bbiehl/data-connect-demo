@@ -1,20 +1,75 @@
 @use '@angular/material' as mat;
 
 :host {
-  @include mat.toolbar-overrides(
+  @include mat.button-overrides(
     (
-      container-background-color: var(--mat-sys-secondary),
-      container-text-color: var(--mat-sys-on-secondary),
+      text-horizontal-padding: 0.2rem,
+      text-label-text-color: var(--mat-sys-on-secondary),
+      text-label-text-size: var(--mat-sys-body-medium),
     )
   );
 }
 
-.layout {
-  width: 100%;
-  max-width: 1200px;
+footer {
+  background-color: var(--mat-sys-secondary);
+  color: var(--mat-sys-on-secondary);
+  padding-bottom: 1rem;
+}
+
+section {
   margin: 0 auto;
+  max-width: 1200px;
+
+  @media (max-width: 1200px) {
+    max-width: calc(100% - 2rem);
+  }
+}
+
+.credits {
+  a {
+    color: inherit;
+    text-decoration: none;
+    font-weight: 900;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+
+  @media (max-width: 600px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+  }
+}
+
+.divider {
+  margin-bottom: 1rem;
+}
+
+.space-between {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.center-content {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
