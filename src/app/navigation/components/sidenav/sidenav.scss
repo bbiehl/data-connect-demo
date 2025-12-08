@@ -18,36 +18,13 @@
 .mat-sidenav {
   max-width: 300px;
 
-  @include mat.sidenav-overrides(
-    (
-      container-background-color: var(--mat-sys-secondary-container),
-    )
-  );
-
   @include mat.button-overrides(
     (
-      filled-container-color: var(--mat-sys-secondary-container),
-      filled-label-text-color: var(--mat-sys-on-secondary-container),
+      filled-container-color: var(--mat-sys-surface),
+      filled-label-text-color: var(--mat-sys-on-surface),
       filled-label-text-size: var(--mat-sys-title-large-size),
     )
   );
-
-  @include mat.icon-button-overrides(
-    (
-      icon-color: var(--mat-sys-on-secondary-container),
-    )
-  );
-
-  @include mat.divider-overrides(
-    (
-      color: var(--mat-sys-on-secondary-container),
-    )
-  );
-
-  .active-link {
-    background-color: var(--mat-sys-secondary);
-    color: var(--mat-sys-on-secondary);
-  }
 
   .container {
     display: flex;

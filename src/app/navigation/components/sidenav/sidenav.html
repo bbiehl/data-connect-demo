@@ -7,27 +7,8 @@
   >
     <div class="container">
       <nav>
-        <a
-          matButton="filled"
-          routerLink="/"
-          routerLinkActive="active-link"
-          (click)="navigationService.closeSidenav()"
-          >Home</a
-        >
-        <a
-          matButton="filled"
-          routerLink="/about"
-          routerLinkActive="active-link"
-          (click)="navigationService.closeSidenav()"
-          >About</a
-        >
-        <a
-          matButton="filled"
-          routerLink="/contact"
-          routerLinkActive="active-link"
-          (click)="navigationService.closeSidenav()"
-          >Contact</a
-        >
+        <app-theme></app-theme>
+        <app-navlinks alignment="vertical"></app-navlinks>
       </nav>
       <mat-divider></mat-divider>
       <div class="socials">

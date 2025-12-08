@@ -20,7 +20,9 @@ import {
   RouterModule,
 } from '@angular/router';
 import { Footer } from '../../../shared/components/footer/footer';
+import { Navlinks } from '../../../shared/components/navlinks/navlinks';
 import { GITHUB_ICON, LINKEDIN_ICON, TWITTER_ICON } from '../../../shared/constants/icons.const';
+import { Theme } from '../../../theme/components/theme/theme';
 import { NavigationService } from '../../navigation.service';
 
 @Component({
@@ -31,7 +33,9 @@ import { NavigationService } from '../../navigation.service';
     MatIconModule,
     MatSidenavModule,
     RouterModule,
+    Navlinks,
     Footer,
+    Theme,
   ],
   templateUrl: './sidenav.html',
   styleUrl: './sidenav.scss',

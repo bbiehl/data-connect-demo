@@ -4,13 +4,14 @@ import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { DomSanitizer } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+import { Navlinks } from '../../../shared/components/navlinks/navlinks';
 import { GITHUB_ICON, LINKEDIN_ICON, TWITTER_ICON } from '../../../shared/constants/icons.const';
 import { Theme } from '../../../theme/components/theme/theme';
 import { NavigationService } from '../../navigation.service';
 
 @Component({
   selector: 'app-navbar',
-  imports: [MatButtonModule, MatIconModule, MatToolbarModule, RouterModule, Theme],
+  imports: [MatButtonModule, MatIconModule, MatToolbarModule, RouterModule, Navlinks, Theme],
   templateUrl: './navbar.html',
   styleUrl: './navbar.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
