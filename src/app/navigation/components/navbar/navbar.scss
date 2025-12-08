@@ -10,7 +10,7 @@
 
   @include mat.button-overrides(
     (
-      filled-horizontal-padding: 0,
+      filled-horizontal-padding: 0.2rem,
     )
   );
 
@@ -19,15 +19,6 @@
       icon-color: var(--mat-sys-on-primary),
     )
   );
-
-  .active-link {
-    @include mat.button-overrides(
-      (
-        filled-container-color: var(--mat-sys-primary-container),
-        filled-label-text-color: var(--mat-sys-on-primary-container),
-      )
-    );
-  }
 }
 
 .mat-toolbar {
@@ -37,8 +28,6 @@
 
 .layout {
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
   display: flex;
   flex-direction: row;
   align-items: center;

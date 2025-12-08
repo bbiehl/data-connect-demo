@@ -1,0 +1,24 @@
+@use '@angular/material' as mat;
+
+.active-link {
+  @include mat.button-overrides(
+    (
+      filled-container-color: var(--mat-sys-primary-container),
+      filled-label-text-color: var(--mat-sys-on-primary-container),
+    )
+  );
+}
+
+.horizontal-links {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.vertical-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}

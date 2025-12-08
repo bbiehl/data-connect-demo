@@ -7,49 +7,12 @@
   >
     <div class="container">
       <nav>
-        <a
-          matButton="filled"
-          routerLink="/"
-          routerLinkActive="active-link"
-          (click)="navigationService.closeSidenav()"
-          >Home</a
-        >
-        <a
-          matButton="filled"
-          routerLink="/about"
-          routerLinkActive="active-link"
-          (click)="navigationService.closeSidenav()"
-          >About</a
-        >
-        <a
-          matButton="filled"
-          routerLink="/contact"
-          routerLinkActive="active-link"
-          (click)="navigationService.closeSidenav()"
-          >Contact</a
-        >
+        <app-theme></app-theme>
+        <app-navlinks alignment="vertical"></app-navlinks>
       </nav>
       <mat-divider></mat-divider>
       <div class="socials">
-        <a
-          matIconButton
-          href="https://github.com/bbiehl/data-connect-demo"
-          target="_blank"
-          aria-label="GitHub"
-        >
-          <mat-icon svgIcon="github-icon"></mat-icon>
-        </a>
-        <a
-          matIconButton
-          href="https://www.linkedin.com/in/bradley-biehl/"
-          target="_blank"
-          aria-label="LinkedIn"
-        >
-          <mat-icon svgIcon="linkedin-icon"></mat-icon>
-        </a>
-        <a matIconButton href="https://x.com/bradley_biehl" target="_blank" aria-label="Twitter">
-          <mat-icon svgIcon="twitter-icon"></mat-icon>
-        </a>
+        <app-socials></app-socials>
       </div>
     </div>
   </mat-sidenav>
