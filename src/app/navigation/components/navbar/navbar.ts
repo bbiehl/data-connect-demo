@@ -1,11 +1,9 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { DomSanitizer } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { Navlinks } from '../../../shared/components/navlinks/navlinks';
-import { GITHUB_ICON, LINKEDIN_ICON, TWITTER_ICON } from '../../../shared/constants/icons.const';
 import { Theme } from '../../../theme/components/theme/theme';
 import { NavigationService } from '../../navigation.service';
 
@@ -18,15 +16,4 @@ import { NavigationService } from '../../navigation.service';
 })
 export class Navbar {
   navigationService = inject(NavigationService);
-
-  constructor() {
-    const iconRegistry = inject(MatIconRegistry);
-    const sanitizer = inject(DomSanitizer);
-    iconRegistry.addSvgIconLiteral(
-      'linkedin-icon',
-      sanitizer.bypassSecurityTrustHtml(LINKEDIN_ICON)
-    );
-    iconRegistry.addSvgIconLiteral('github-icon', sanitizer.bypassSecurityTrustHtml(GITHUB_ICON));
-    iconRegistry.addSvgIconLiteral('twitter-icon', sanitizer.bypassSecurityTrustHtml(TWITTER_ICON));
-  }
 }

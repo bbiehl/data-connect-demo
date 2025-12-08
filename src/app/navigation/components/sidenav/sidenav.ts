@@ -8,9 +8,8 @@ import {
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
-import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavContainer, MatSidenavModule } from '@angular/material/sidenav';
-import { DomSanitizer } from '@angular/platform-browser';
 import {
   Event,
   NavigationCancel,
@@ -21,7 +20,7 @@ import {
 } from '@angular/router';
 import { Footer } from '../../../shared/components/footer/footer';
 import { Navlinks } from '../../../shared/components/navlinks/navlinks';
-import { GITHUB_ICON, LINKEDIN_ICON, TWITTER_ICON } from '../../../shared/constants/icons.const';
+import { Socials } from '../../../shared/components/socials/socials';
 import { Theme } from '../../../theme/components/theme/theme';
 import { NavigationService } from '../../navigation.service';
 
@@ -35,6 +34,7 @@ import { NavigationService } from '../../navigation.service';
     RouterModule,
     Navlinks,
     Footer,
+    Socials,
     Theme,
   ],
   templateUrl: './sidenav.html',
@@ -48,15 +48,6 @@ export class Sidenav implements AfterViewInit {
   private router = inject(Router);
 
   constructor() {
-    const iconRegistry = inject(MatIconRegistry);
-    const sanitizer = inject(DomSanitizer);
-    iconRegistry.addSvgIconLiteral(
-      'linkedin-icon',
-      sanitizer.bypassSecurityTrustHtml(LINKEDIN_ICON)
-    );
-    iconRegistry.addSvgIconLiteral('github-icon', sanitizer.bypassSecurityTrustHtml(GITHUB_ICON));
-    iconRegistry.addSvgIconLiteral('twitter-icon', sanitizer.bypassSecurityTrustHtml(TWITTER_ICON));
-
     this.router.events.subscribe((event: Event) => {
       switch (true) {
         case event instanceof NavigationEnd:

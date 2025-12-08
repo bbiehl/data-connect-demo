@@ -8,6 +8,12 @@
       filled-horizontal-padding: 0.2rem,
     )
   );
+
+  @include mat.icon-button-overrides(
+    (
+      icon-color: var(--mat-sys-on-secondary),
+    )
+  );
 }
 
 footer {
