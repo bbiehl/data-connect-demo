@@ -12,6 +12,7 @@ import { connectorConfig } from '@dataconnect/generated';
 import { provideQueryClient, QueryClient } from '@tanstack/angular-query-experimental';
 import { routes } from './app.routes';
 import { environment } from './environments/environment';
+import { getAuth, provideAuth } from '@angular/fire/auth';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -20,6 +21,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideClientHydration(withEventReplay()),
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+    provideAuth(() => getAuth()),
     provideAnalytics(() => getAnalytics()),
     provideQueryClient(new QueryClient()),
     provideDataConnect(() => getDataConnect(connectorConfig)),
