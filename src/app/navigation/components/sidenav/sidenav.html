@@ -1,0 +1,30 @@
+<mat-sidenav-container (backdropClick)="navigationService.closeSidenav()">
+  <mat-sidenav
+    autoFocus="false"
+    mode="over"
+    position="end"
+    [opened]="navigationService.sidenavOpened()"
+  >
+    <div class="container">
+      <nav>
+        <app-theme></app-theme>
+        <app-navlinks alignment="vertical"></app-navlinks>
+      </nav>
+      <mat-divider></mat-divider>
+      <div class="socials">
+        <app-socials></app-socials>
+      </div>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    @if (showBackToTopFab()) {
+    <div class="back-to-top-fab">
+      <button matFab aria-label="Back to top" (click)="scrollToTop()">
+        <mat-icon>arrow_upward</mat-icon>
+      </button>
+    </div>
+    }
+    <router-outlet></router-outlet>
+    <app-footer></app-footer>
+  </mat-sidenav-content>
+</mat-sidenav-container>

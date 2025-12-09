@@ -23,6 +23,12 @@ It has the same format as `User_Key`, but is only used as mutation return value.
 """
 scalar User_KeyOutput
 """
+✨ `UserRole_Expr` is a server value variant of enum type `UserRole`.
+
+It accepts a CEL expression.
+"""
+scalar UserRole_Expr
+"""
 ✨ Generated data input type for table 'Movie'. It includes all necessary fields for creating or upserting rows into table.
 """
 input Movie_Data {
@@ -855,6 +861,10 @@ input User_Data {
   ✨ Generated from Field `User`.`role` of type `UserRole!`
   """
   role: UserRole
+  """
+  ✨ `_expr` server value variant of `role` (✨ Generated from Field `User`.`role` of type `UserRole!`)
+  """
+  role_expr: UserRole_Expr
   """
   ✨ Generated from Field `User`.`username` of type `String!`
   """

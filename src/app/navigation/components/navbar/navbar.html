@@ -1,0 +1,19 @@
+<mat-toolbar>
+  <div class="layout">
+    <h1>Data Connect Demo</h1>
+    <div class="nav-links">
+      <app-navlinks alignment="horizontal"></app-navlinks>
+      <app-theme></app-theme>
+    </div>
+  </div>
+
+  <div class="menu-button">
+    <button matIconButton (click)="navigationService.toggleSidenav()">
+      @if (navigationService.sidenavOpened()) {
+      <mat-icon>close</mat-icon>
+      } @else {
+      <mat-icon>menu</mat-icon>
+      }
+    </button>
+  </div>
+</mat-toolbar>

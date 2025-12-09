@@ -1,0 +1,7 @@
+<button matIconButton (click)="toggleDarkMode()">
+  @if (themeService.isDarkMode()) {
+  <mat-icon matTooltip="Switch to light mode">dark_mode</mat-icon>
+  } @else {
+  <mat-icon matTooltip="Switch to dark mode">light_mode</mat-icon>
+  }
+</button>
