@@ -14,7 +14,7 @@ const initialState: AuthState = {
   error: null,
 };
 
-export const authEvents = eventGroup({
+export const authAPIEvents = eventGroup({
   source: 'Auth API',
   events: {
     checkforAuthenticatedUser: type<void>(),
@@ -28,22 +28,22 @@ export const AuthStore = signalStore(
   { providedIn: 'root' },
   withState(initialState),
   withReducer(
-    on(authEvents.checkforAuthenticatedUser, () => ({
+    on(authAPIEvents.checkforAuthenticatedUser, () => ({
       authenticatedUser: null,
       pending: true,
       error: null,
     })),
-    on(authEvents.setAuthenticatedUserSuccess, ({ payload: user }) => ({
+    on(authAPIEvents.setAuthenticatedUserSuccess, ({ payload: user }) => ({
       authenticatedUser: user,
       pending: false,
       error: null,
     })),
-    on(authEvents.setAuthenticatedUserFail, () => ({
+    on(authAPIEvents.setAuthenticatedUserFail, () => ({
       authenticatedUser: null,
       pending: false,
       error: null,
     })),
-    on(authEvents.error, ({ payload: error }) => ({
+    on(authAPIEvents.error, ({ payload: error }) => ({
       authenticatedUser: null,
       pending: false,
       error: error,
