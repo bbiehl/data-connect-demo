@@ -1,8 +1,6 @@
-import { effect } from '@angular/core';
 import { User } from '@angular/fire/auth';
-import { getState, signalStore, type, watchState, withHooks, withState } from '@ngrx/signals';
+import { signalStore, type, watchState, withHooks, withState } from '@ngrx/signals';
 import { eventGroup, on, withReducer } from '@ngrx/signals/events';
-// import { authEvents } from './auth.events';
 
 type AuthState = {
   authenticatedUser: User | null;
@@ -55,10 +53,6 @@ export const AuthStore = signalStore(
     onInit(store) {
       watchState(store, (state) => {
         console.log('Auth State Changed', state);
-      });
-
-      effect(() => {
-        console.log('[effect] Authenticated User:', getState(store));
       });
     },
   })

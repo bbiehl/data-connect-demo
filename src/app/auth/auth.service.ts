@@ -10,7 +10,7 @@ import { map } from 'rxjs';
 export class AuthService {
   private auth = inject(Auth);
 
-  checkForAuthenticatedUser(): Signal<User | null> {
+  loadAuthenticaticatedUser(): Signal<User | null> {
     return toSignal(authState(this.auth).pipe(map((user) => user ?? null)), { initialValue: null });
   }
 }
