@@ -1,4 +1,6 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { injectDispatch } from '@ngrx/signals/events';
+import { authEvents } from './auth/auth.store';
 import { Navbar } from './navigation/components/navbar/navbar';
 import { Sidenav } from './navigation/components/sidenav/sidenav';
 import { ThemeService } from './theme/theme.service';
@@ -10,6 +12,10 @@ import { ThemeService } from './theme/theme.service';
   styleUrl: './app.scss',
 })
 export class App {
-  protected readonly title = signal('data-connect-demo');
-  themeService = inject(ThemeService);
+  readonly dispatch = injectDispatch(authEvents);
+  readonly themeService = inject(ThemeService);
+
+  constructor() {
+    this.dispatch.checkforAuthenticatedUser();
+  }
 }
