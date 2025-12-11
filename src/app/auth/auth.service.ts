@@ -1,8 +1,7 @@
-import { inject, Injectable, Signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { inject, Injectable } from '@angular/core';
 import { Auth, authState } from '@angular/fire/auth';
 import { User } from 'firebase/auth';
-import { map } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +9,8 @@ import { map } from 'rxjs';
 export class AuthService {
   private auth = inject(Auth);
 
-  loadAuthenticaticatedUser(): Signal<User | null> {
-    return toSignal(authState(this.auth).pipe(map((user) => user ?? null)), { initialValue: null });
+  getAuthenticatedUser$(): Observable<User | null> {
+    return authState(this.auth);
+    //  return(throwError('Not implemented yet'));
   }
 }
