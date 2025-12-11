@@ -9,6 +9,8 @@
     </mat-form-field>
   </div>
 
+  <div>User: {{ authStore.authenticatedUser | json }}</div>
+
   <h2>Top Rated Movies</h2>
   <div class="movie-list">
     @for (movie of topRatedMovies; track movie) {
