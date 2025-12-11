@@ -1,5 +1,6 @@
 import {
   ApplicationConfig,
+  isDevMode,
   provideBrowserGlobalErrorListeners,
   provideZonelessChangeDetection,
 } from '@angular/core';
@@ -10,6 +11,8 @@ import { getDataConnect, provideDataConnect } from '@angular/fire/data-connect';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
 import { connectorConfig } from '@dataconnect/generated';
+import { provideStore } from '@ngrx/store';
+import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideQueryClient, QueryClient } from '@tanstack/angular-query-experimental';
 import { routes } from './app.routes';
 import { environment } from './environments/environment';
@@ -25,5 +28,12 @@ export const appConfig: ApplicationConfig = {
     provideAnalytics(() => getAnalytics()),
     provideQueryClient(new QueryClient()),
     provideDataConnect(() => getDataConnect(connectorConfig)),
+    provideStore(),
+    provideStoreDevtools({
+      maxAge: 25,
+      logOnly: !isDevMode(),
+      traceLimit: 75,
+      connectInZone: false,
+    }),
   ],
 };
