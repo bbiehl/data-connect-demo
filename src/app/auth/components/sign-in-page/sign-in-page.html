@@ -1,1 +1,36 @@
-<p>sign-in-page works!</p>
+<h1>Welcome!</h1>
+<h2>Enter your details to access account</h2>
+<button matButton="outlined">
+  <mat-icon svgIcon="google-icon"></mat-icon>
+  Sign in with Google
+</button>
+<section class="divider">
+  <mat-divider></mat-divider>
+  <div>OR CONTINUE WITH</div>
+  <mat-divider></mat-divider>
+</section>
+<form class="form">
+  @if (signInForm.email().touched() && signInForm.email().invalid()) { @for (error of
+  signInForm.email().errors(); track error) {
+  <mat-error>{{ error.message }}</mat-error>
+  } }
+  <mat-form-field appearance="outline">
+    <mat-label>Email</mat-label>
+    <input matInput type="email" [field]="signInForm.email" />
+    <mat-icon matPrefix>email</mat-icon>
+  </mat-form-field>
+  @if (signInForm.password().touched() && signInForm.password().invalid()) { @for (error of
+  signInForm.password().errors(); track error) {
+  <mat-error>{{ error.message }}</mat-error>
+  } }
+  <mat-form-field appearance="outline">
+    <mat-label>Password</mat-label>
+    <input matInput type="password" [field]="signInForm.password" />
+    <mat-icon matPrefix>password</mat-icon>
+  </mat-form-field>
+</form>
+<button matButton="tonal" [disabled]="!signInForm().valid()" (click)="signIn($event)">
+  Sign In
+</button>
+<p>Don't have an account? <a routerLink="/sign-up">Sign Up</a></p>
+<p>Forgot your password? <a routerLink="/forgot-password">Reset Password</a></p>

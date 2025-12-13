@@ -1,12 +1,56 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { email, Field, form, required } from '@angular/forms/signals';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { DomSanitizer } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
+import { GOOGLE_ICON } from '../../../shared/constants/icons.const';
 
+interface SignInData {
+  email: string;
+  password: string;
+}
 @Component({
   selector: 'app-sign-in-page',
-  imports: [],
+  imports: [
+    Field,
+    MatButtonModule,
+    MatDividerModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    RouterModule,
+  ],
   templateUrl: './sign-in-page.html',
   styleUrl: './sign-in-page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignInPage {
+  signInModel = signal<SignInData>({
+    email: '',
+    password: '',
+  });
 
+  signInForm = form(this.signInModel, (schemaPath) => {
+    required(schemaPath.email, { message: 'Email is required' });
+    email(schemaPath.email, { message: 'Enter a valid email address' });
+    required(schemaPath.password, { message: 'Password is required' });
+  });
+
+  signIn(event: Event): void {
+    event.preventDefault();
+    const credentials = this.signInModel();
+    console.log('Sign In form submitted with value:', credentials);
+  }
+
+  constructor() {
+    const iconRegistry = inject(MatIconRegistry);
+    const sanitizer = inject(DomSanitizer);
+    iconRegistry.addSvgIconLiteral('google-icon', sanitizer.bypassSecurityTrustHtml(GOOGLE_ICON));
+  }
 }
