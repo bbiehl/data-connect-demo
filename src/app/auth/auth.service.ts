@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { Auth, authState } from '@angular/fire/auth';
 import { User } from 'firebase/auth';
 import { Observable } from 'rxjs';
@@ -8,9 +8,14 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
   private auth = inject(Auth);
+  public storedEmail = signal<string | null>(null);
 
   getAuthenticatedUser$(): Observable<User | null> {
     return authState(this.auth);
     //  return(throwError('Not implemented yet'));
+  }
+
+  setStoredEmail(email: string): void {
+    this.storedEmail.set(email);
   }
 }

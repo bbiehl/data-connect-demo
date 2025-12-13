@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { DomSanitizer } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { GOOGLE_ICON } from '../../../shared/constants/icons.const';
+import { AuthService } from '../../auth.service';
 
 interface SignInData {
   email: string;
@@ -31,6 +32,7 @@ interface SignInData {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignInPage {
+  private authService = inject(AuthService);
   signInModel = signal<SignInData>({
     email: '',
     password: '',
@@ -41,6 +43,13 @@ export class SignInPage {
     email(schemaPath.email, { message: 'Enter a valid email address' });
     required(schemaPath.password, { message: 'Password is required' });
   });
+
+  setStoredEmail(): void {
+    if (this.signInForm.email().valid()) {
+      const email = this.signInForm.email().value();
+      this.authService.setStoredEmail(email);
+    }
+  }
 
   signIn(event: Event): void {
     event.preventDefault();
