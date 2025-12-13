@@ -11,4 +11,7 @@ export const routes: Routes = [
     loadComponent: () => import('./auth/components/sign-in-page/sign-in-page').then((c) => c.SignInPage),
     title: 'Sign In',
   },
+  //need a route for sign-up
+  //need a route for password reset
+  //need a 404 page
 ];
