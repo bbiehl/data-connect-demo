@@ -1,6 +1,6 @@
 <h1>Welcome!</h1>
 <h2>Enter your details to access account</h2>
-<button matButton="outlined">
+<button matButton="outlined" (click)="signInWithGoogle()">
   <mat-icon svgIcon="google-icon"></mat-icon>
   Sign in with Google
 </button>
@@ -38,7 +38,7 @@
   </mat-form-field>
   }
 </form>
-<button matButton="tonal" [disabled]="!signInForm().valid()" (click)="signIn($event)">
+<button matButton="tonal" [disabled]="!signInForm().valid()" (click)="signInWithEmail($event)">
   Sign In
 </button>
 <p>Don't have an account? <a routerLink="/sign-up">Sign Up</a></p>

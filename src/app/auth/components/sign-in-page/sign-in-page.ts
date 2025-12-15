@@ -10,6 +10,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { GOOGLE_ICON } from '../../../shared/constants/icons.const';
 import { AuthService } from '../../auth.service';
+import { authAPIEvents, AuthStore } from '../../auth.store';
+import { injectDispatch } from '@ngrx/signals/events';
 
 interface SignInData {
   email: string;
@@ -33,6 +35,8 @@ interface SignInData {
 })
 export class SignInPage {
   private authService = inject(AuthService);
+  private authStore = inject(AuthStore);
+  readonly dispatch = injectDispatch(authAPIEvents);
   hidePassword = signal(true);
   signInModel = signal<SignInData>({
     email: '',
@@ -52,10 +56,15 @@ export class SignInPage {
     }
   }
 
-  signIn(event: Event): void {
+  signInWithGoogle(): void {
+    this.dispatch.signInWithGoogle();
+  }
+
+  signInWithEmail(event: Event): void {
     event.preventDefault();
     const credentials = this.signInModel();
-    console.log('Sign In form submitted with value:', credentials);
+    console.log('SignInPage - signInWithEmail called with credentials:', credentials);
+    // this.dispatch.signInWithEmailAndPassword(credentials);
   }
 
   togglePasswordVisibility(): void {
