@@ -13,5 +13,6 @@ export const routes: Routes = [
   },
   //need a route for sign-up
   //need a route for password reset
+  //need a route for profile page
   //need a 404 page
 ];
