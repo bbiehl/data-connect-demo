@@ -83,10 +83,6 @@ export const AuthStore = signalStore(
   })),
   withHooks({
     onInit(store) {
-        effect(() => {
-            console.log('AuthStore effect - Current Auth State:', getState(store));
-        })
-
       watchState(store, (state) => {
         console.log('Auth State Changed', state);
       });
