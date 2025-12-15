@@ -17,20 +17,32 @@
   <mat-form-field appearance="outline">
     <mat-label>Email</mat-label>
     <input matInput type="email" [field]="signInForm.email" />
-    <mat-icon matPrefix>email</mat-icon>
+    <mat-icon matIconPrefix>email</mat-icon>
   </mat-form-field>
   @if (signInForm.password().touched() && signInForm.password().invalid()) { @for (error of
   signInForm.password().errors(); track error) {
   <mat-error>{{ error.message }}</mat-error>
-  } }
+  } } @if (hidePassword()) {
   <mat-form-field appearance="outline">
     <mat-label>Password</mat-label>
     <input matInput type="password" [field]="signInForm.password" />
-    <mat-icon matPrefix>password</mat-icon>
+    <mat-icon matIconPrefix>password</mat-icon>
+    <mat-icon matIconSuffix (click)="togglePasswordVisibility()">visibility_off</mat-icon>
   </mat-form-field>
+  } @else {
+  <mat-form-field appearance="outline">
+    <mat-label>Password</mat-label>
+    <input matInput type="text" [field]="signInForm.password" />
+    <mat-icon matIconPrefix>password</mat-icon>
+    <mat-icon matIconSuffix (click)="togglePasswordVisibility()">visibility</mat-icon>
+  </mat-form-field>
+  }
 </form>
 <button matButton="tonal" [disabled]="!signInForm().valid()" (click)="signIn($event)">
   Sign In
 </button>
 <p>Don't have an account? <a routerLink="/sign-up">Sign Up</a></p>
-<p>Forgot your password? <a routerLink="/reset-password" (click)="setStoredEmail()">Reset Password</a></p>
+<p>
+  Forgot your password?
+  <a routerLink="/reset-password" (click)="setStoredEmail()">Reset Password</a>
+</p>

@@ -33,6 +33,7 @@ interface SignInData {
 })
 export class SignInPage {
   private authService = inject(AuthService);
+  hidePassword = signal(true);
   signInModel = signal<SignInData>({
     email: '',
     password: '',
@@ -55,6 +56,10 @@ export class SignInPage {
     event.preventDefault();
     const credentials = this.signInModel();
     console.log('Sign In form submitted with value:', credentials);
+  }
+
+  togglePasswordVisibility(): void {
+    this.hidePassword.update((current) => !current);
   }
 
   constructor() {
