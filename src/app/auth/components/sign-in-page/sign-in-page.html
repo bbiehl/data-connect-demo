@@ -1,5 +1,7 @@
 <h1>Welcome!</h1>
+<p>User: {{ authStore.authenticatedUser()?.email | json }}</p>
 <h2>Enter your details to access account</h2>
+
 <button matButton="outlined" (click)="signInWithGoogle()">
   <mat-icon svgIcon="google-icon"></mat-icon>
   Sign in with Google

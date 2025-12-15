@@ -1,3 +1,4 @@
+import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { email, Field, form, required } from '@angular/forms/signals';
@@ -8,10 +9,10 @@ import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { DomSanitizer } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+import { injectDispatch } from '@ngrx/signals/events';
 import { GOOGLE_ICON } from '../../../shared/constants/icons.const';
 import { AuthService } from '../../auth.service';
 import { authAPIEvents, AuthStore } from '../../auth.store';
-import { injectDispatch } from '@ngrx/signals/events';
 
 interface SignInData {
   email: string;
@@ -28,6 +29,7 @@ interface SignInData {
     MatInputModule,
     ReactiveFormsModule,
     RouterModule,
+    JsonPipe,
   ],
   templateUrl: './sign-in-page.html',
   styleUrl: './sign-in-page.scss',
@@ -35,7 +37,7 @@ interface SignInData {
 })
 export class SignInPage {
   private authService = inject(AuthService);
-  private authStore = inject(AuthStore);
+  authStore = inject(AuthStore);
   readonly dispatch = injectDispatch(authAPIEvents);
   hidePassword = signal(true);
   signInModel = signal<SignInData>({
