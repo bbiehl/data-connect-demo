@@ -1,5 +1,12 @@
+@if (authStore.pending()) {
+<p>Loading...</p>
+} @else {
 <h1>Welcome!</h1>
 <p>User: {{ authStore.authenticatedUser()?.email | json }}</p>
+@if (!!authStore.authenticatedUser()) {
+<button matButton="outlined" (click)="signOut()">Sign Out</button>
+}
+
 <h2>Enter your details to access account</h2>
 
 <button matButton="outlined" (click)="signInWithGoogle()">
@@ -48,3 +55,4 @@
   Forgot your password?
   <a routerLink="/reset-password" (click)="setStoredEmail()">Reset Password</a>
 </p>
+}

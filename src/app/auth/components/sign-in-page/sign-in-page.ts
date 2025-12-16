@@ -9,10 +9,9 @@ import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { DomSanitizer } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { injectDispatch } from '@ngrx/signals/events';
 import { GOOGLE_ICON } from '../../../shared/constants/icons.const';
 import { AuthService } from '../../auth.service';
-import { authAPIEvents, AuthStore } from '../../auth.store';
+import { AuthStore } from '../../auth.store';
 
 interface SignInData {
   email: string;
@@ -36,20 +35,24 @@ interface SignInData {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignInPage {
-  private authService = inject(AuthService);
-  authStore = inject(AuthStore);
-  readonly dispatch = injectDispatch(authAPIEvents);
+  private readonly authService = inject(AuthService);
+  protected readonly authStore = inject(AuthStore);
   hidePassword = signal(true);
   signInModel = signal<SignInData>({
     email: '',
     password: '',
   });
-
   signInForm = form(this.signInModel, (schemaPath) => {
     required(schemaPath.email, { message: 'Email is required' });
     email(schemaPath.email, { message: 'Enter a valid email address' });
     required(schemaPath.password, { message: 'Password is required' });
   });
+
+  constructor() {
+    const iconRegistry = inject(MatIconRegistry);
+    const sanitizer = inject(DomSanitizer);
+    iconRegistry.addSvgIconLiteral('google-icon', sanitizer.bypassSecurityTrustHtml(GOOGLE_ICON));
+  }
 
   setStoredEmail(): void {
     if (this.signInForm.email().valid()) {
@@ -59,7 +62,12 @@ export class SignInPage {
   }
 
   signInWithGoogle(): void {
-    this.dispatch.signInWithGoogle();
+    this.authStore.signInWithGoogle();
+  }
+
+  // This is temporary until we implement a user profile page
+  signOut(): void {
+    this.authStore.signOut();
   }
 
   signInWithEmail(event: Event): void {
@@ -71,11 +79,5 @@ export class SignInPage {
 
   togglePasswordVisibility(): void {
     this.hidePassword.update((current) => !current);
-  }
-
-  constructor() {
-    const iconRegistry = inject(MatIconRegistry);
-    const sanitizer = inject(DomSanitizer);
-    iconRegistry.addSvgIconLiteral('google-icon', sanitizer.bypassSecurityTrustHtml(GOOGLE_ICON));
   }
 }
