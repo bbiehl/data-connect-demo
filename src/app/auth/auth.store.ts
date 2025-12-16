@@ -12,6 +12,7 @@ import {
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { distinctUntilChanged, pipe, switchMap, tap } from 'rxjs';
 import { AuthService } from './auth.service';
+import { sign } from 'crypto';
 
 type AuthState = {
   authenticatedUser: User | null;
@@ -35,6 +36,26 @@ export const AuthStore = signalStore(
         tap(() => patchState(store, { pending: true, error: null })),
         switchMap(() => {
           return authService.getAuthenticatedUser$().pipe(
+            tapResponse({
+              next: (user) =>
+                patchState(store, { authenticatedUser: user, pending: false, error: null }),
+              error: (error: { message: string }) =>
+                patchState(store, {
+                  authenticatedUser: null,
+                  pending: false,
+                  error: error.message,
+                }),
+            })
+          );
+        })
+      )
+    ),
+    signInWithEmailAndPassword: rxMethod<{ email: string; password: string }>(
+      pipe(
+        distinctUntilChanged(),
+        tap(() => patchState(store, { pending: true, error: null })),
+        switchMap(({ email, password }) => {
+          return authService.signInWithEmailAndPassword(email, password).pipe(
             tapResponse({
               next: (user) =>
                 patchState(store, { authenticatedUser: user, pending: false, error: null }),

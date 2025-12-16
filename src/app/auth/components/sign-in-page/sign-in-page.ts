@@ -73,8 +73,7 @@ export class SignInPage {
   signInWithEmail(event: Event): void {
     event.preventDefault();
     const credentials = this.signInModel();
-    console.log('SignInPage - signInWithEmail called with credentials:', credentials);
-    // this.dispatch.signInWithEmailAndPassword(credentials);
+    this.authStore.signInWithEmailAndPassword(credentials);
   }
 
   togglePasswordVisibility(): void {

@@ -1,8 +1,14 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { Auth, authState, GoogleAuthProvider, signInWithPopup } from '@angular/fire/auth';
+import {
+  Auth,
+  authState,
+  GoogleAuthProvider,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+} from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { User } from 'firebase/auth';
-import { from, Observable } from 'rxjs';
+import { asyncScheduler, from, map, Observable, scheduled, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +24,20 @@ export class AuthService {
 
   setStoredEmail(email: string): void {
     this.storedEmail.set(email);
+  }
+
+  signInWithEmailAndPassword(email: string, password: string): Observable<User | null> {
+    return scheduled(signInWithEmailAndPassword(this.auth, email, password), asyncScheduler).pipe(
+      switchMap(async (result) => result.user)
+    );
+
+    // return from(signInWithEmailAndPassword(this.auth, email, password).then(async (result) => {
+    //   if (result.user) {
+    //     return this.auth.currentUser;
+    //   } else {
+    //     return null;
+    //   }
+    // }));
   }
 
   signInWithGoogle(): Observable<User | null> {
