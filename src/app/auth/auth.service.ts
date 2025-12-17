@@ -6,9 +6,9 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   updateProfile,
+  User,
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { User } from 'firebase/auth';
 import { from, Observable, switchMap, throwError } from 'rxjs';
 
 @Injectable({
