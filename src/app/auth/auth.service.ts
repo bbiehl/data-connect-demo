@@ -17,6 +17,7 @@ export class AuthService {
   private auth = inject(Auth);
   private router = inject(Router);
   public storedEmail = signal<string | null>(null);
+  public storedPassword = signal<string | null>(null);
 
   getAuthenticatedUser$(): Observable<User | null> {
     return authState(this.auth);
@@ -24,6 +25,10 @@ export class AuthService {
 
   setStoredEmail(email: string): void {
     this.storedEmail.set(email);
+  }
+
+  setStoredPassword(password: string): void {
+    this.storedPassword.set(password);
   }
 
   signInWithEmailAndPassword(email: string, password: string): Observable<User | null> {

@@ -1,4 +1,3 @@
-import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { email, Field, form, required } from '@angular/forms/signals';
@@ -28,7 +27,6 @@ interface SignInData {
     MatInputModule,
     ReactiveFormsModule,
     RouterModule,
-    JsonPipe,
   ],
   templateUrl: './sign-in-page.html',
   styleUrl: './sign-in-page.scss',
@@ -58,6 +56,13 @@ export class SignInPage {
     if (this.signInForm.email().valid()) {
       const email = this.signInForm.email().value();
       this.authService.setStoredEmail(email);
+    }
+  }
+
+  setStoredPassword(): void {
+    if (this.signInForm.password().valid()) {
+      const password = this.signInForm.password().value();
+      this.authService.setStoredPassword(password);
     }
   }
 
