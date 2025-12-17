@@ -8,7 +8,7 @@ import {
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { User } from 'firebase/auth';
-import { asyncScheduler, from, map, Observable, scheduled, switchMap } from 'rxjs';
+import { asyncScheduler, Observable, scheduled, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -30,32 +30,18 @@ export class AuthService {
     return scheduled(signInWithEmailAndPassword(this.auth, email, password), asyncScheduler).pipe(
       switchMap(async (result) => result.user)
     );
-
-    // return from(signInWithEmailAndPassword(this.auth, email, password).then(async (result) => {
-    //   if (result.user) {
-    //     return this.auth.currentUser;
-    //   } else {
-    //     return null;
-    //   }
-    // }));
   }
 
   signInWithGoogle(): Observable<User | null> {
     const provider = new GoogleAuthProvider();
     provider.setCustomParameters({ prompt: 'select_account' });
-    return from(
-      signInWithPopup(this.auth, provider).then(async (result) => {
-        if (result.user) {
-          return this.auth.currentUser;
-        } else {
-          return null;
-        }
-      })
+    return scheduled(signInWithPopup(this.auth, provider), asyncScheduler).pipe(
+      switchMap(async (result) => result.user)
     );
   }
 
   signOut(): Observable<void> {
     this.router.navigate(['/']);
-    return from(this.auth.signOut());
+    return scheduled(this.auth.signOut(), asyncScheduler);
   }
 }
