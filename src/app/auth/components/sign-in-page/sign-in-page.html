@@ -13,6 +13,8 @@
   <mat-icon svgIcon="google-icon"></mat-icon>
   Sign in with Google
 </button>
+
+
 <section class="divider">
   <mat-divider></mat-divider>
   <div>OR CONTINUE WITH</div>
@@ -47,6 +49,9 @@
   </mat-form-field>
   }
 </form>
+@if (authStore.error()) {
+<p class="error-message">{{ authStore.error() }}</p>
+}
 <button matButton="tonal" [disabled]="!signInForm().valid()" (click)="signInWithEmail($event)">
   Sign In
 </button>
