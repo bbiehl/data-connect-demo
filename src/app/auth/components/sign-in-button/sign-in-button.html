@@ -1,4 +1,16 @@
+@if (!!authStore.authenticatedUser()) {
+<a matButton="outlined" (click)="signout()">
+  <mat-icon>person_outline</mat-icon>
+  Sign Out
+</a>
+} @else if (authStore.pending()) {
+<a matButton="outlined" disabled>
+  <mat-icon>person</mat-icon>
+  pending...
+</a>
+} @else {
 <a matButton="outlined" routerLink="sign-in" (click)="onLinkClicked()">
   <mat-icon>person</mat-icon>
   Sign In
 </a>
+}

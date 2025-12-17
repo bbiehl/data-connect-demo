@@ -3,6 +3,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { NavigationService } from '../../../navigation/navigation.service';
+import { AuthStore } from '../../auth.store';
 
 @Component({
   selector: 'app-sign-in-button',
@@ -12,9 +13,14 @@ import { NavigationService } from '../../../navigation/navigation.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignInButton {
-  private navigationService = inject(NavigationService);
+  protected readonly authStore = inject(AuthStore);
+  private readonly navigationService = inject(NavigationService);
 
   onLinkClicked(): void {
     this.navigationService.closeSidenav();
+  }
+
+  signout(): void {
+    this.authStore.signOut();
   }
 }
