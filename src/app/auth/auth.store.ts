@@ -91,7 +91,7 @@ export const AuthStore = signalStore(
     ),
     signOut: rxMethod<void>(
       pipe(
-        distinctUntilChanged(),
+        // distinctUntilChanged(),
         tap(() => patchState(store, { pending: true, error: null })),
         switchMap(() => {
           return authService.signOut().pipe(
