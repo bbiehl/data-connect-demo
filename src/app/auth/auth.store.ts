@@ -12,7 +12,6 @@ import {
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { distinctUntilChanged, pipe, switchMap, tap } from 'rxjs';
 import { AuthService } from './auth.service';
-import { sign } from 'crypto';
 
 type AuthState = {
   authenticatedUser: User | null;
