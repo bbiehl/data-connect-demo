@@ -5,10 +5,11 @@ import {
   GoogleAuthProvider,
   signInWithEmailAndPassword,
   signInWithPopup,
+  updateProfile,
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { User } from 'firebase/auth';
-import { asyncScheduler, Observable, scheduled, switchMap } from 'rxjs';
+import { asyncScheduler, from, Observable, scheduled, switchMap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -43,5 +44,13 @@ export class AuthService {
   signOut(): Observable<void> {
     this.router.navigate(['/']);
     return scheduled(this.auth.signOut(), asyncScheduler);
+  }
+
+  updateUserDisplayName(displayName: string): Observable<void> {
+    const currentUser = this.auth.currentUser;
+    if (!currentUser) {
+      return throwError(() => new Error('Cannot update profile. User not authenticated.'));
+    }
+    return from(updateProfile(currentUser, { displayName }));
   }
 }
