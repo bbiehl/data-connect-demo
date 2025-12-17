@@ -6,10 +6,11 @@ import { RouterModule } from '@angular/router';
 import { Navlinks } from '../../../shared/components/navlinks/navlinks';
 import { Theme } from '../../../theme/components/theme/theme';
 import { NavigationService } from '../../navigation.service';
+import { SignInButton } from '../../../auth/components/sign-in-button/sign-in-button';
 
 @Component({
   selector: 'app-navbar',
-  imports: [MatButtonModule, MatIconModule, MatToolbarModule, RouterModule, Navlinks, Theme],
+  imports: [MatButtonModule, MatIconModule, MatToolbarModule, RouterModule, Navlinks, SignInButton, Theme],
   templateUrl: './navbar.html',
   styleUrl: './navbar.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -23,6 +23,7 @@ import { Navlinks } from '../../../shared/components/navlinks/navlinks';
 import { Socials } from '../../../shared/components/socials/socials';
 import { Theme } from '../../../theme/components/theme/theme';
 import { NavigationService } from '../../navigation.service';
+import { SignInButton } from '../../../auth/components/sign-in-button/sign-in-button';
 
 @Component({
   selector: 'app-sidenav',
@@ -34,6 +35,7 @@ import { NavigationService } from '../../navigation.service';
     RouterModule,
     Navlinks,
     Footer,
+    SignInButton,
     Socials,
     Theme,
   ],

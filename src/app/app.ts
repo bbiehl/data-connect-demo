@@ -1,4 +1,5 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { AuthStore } from './auth/auth.store';
 import { Navbar } from './navigation/components/navbar/navbar';
 import { Sidenav } from './navigation/components/sidenav/sidenav';
 import { ThemeService } from './theme/theme.service';
@@ -10,6 +11,10 @@ import { ThemeService } from './theme/theme.service';
   styleUrl: './app.scss',
 })
 export class App {
-  protected readonly title = signal('data-connect-demo');
-  themeService = inject(ThemeService);
+  private readonly authStore = inject(AuthStore);
+  protected readonly themeService = inject(ThemeService);
+
+  constructor() {
+    this.authStore.checkForAuthenticatedUser();
+  }
 }

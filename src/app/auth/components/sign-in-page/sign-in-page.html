@@ -1,0 +1,57 @@
+@if (authStore.pending()) {
+<p>Loading...</p>
+} @else {
+<h1>Welcome!</h1>
+<h2>Enter your details to access account</h2>
+
+<button matButton="outlined" (click)="signInWithGoogle()">
+  <mat-icon svgIcon="google-icon"></mat-icon>
+  Sign in with Google
+</button>
+
+<section class="divider">
+  <mat-divider></mat-divider>
+  <div>OR CONTINUE WITH</div>
+  <mat-divider></mat-divider>
+</section>
+<form class="form">
+  @if (signInForm.email().touched() && signInForm.email().invalid()) { @for (error of
+  signInForm.email().errors(); track error) {
+  <mat-error>{{ error.message }}</mat-error>
+  } }
+  <mat-form-field appearance="outline">
+    <mat-label>Email</mat-label>
+    <input matInput type="email" [field]="signInForm.email" />
+    <mat-icon matIconPrefix>email</mat-icon>
+  </mat-form-field>
+  @if (signInForm.password().touched() && signInForm.password().invalid()) { @for (error of
+  signInForm.password().errors(); track error) {
+  <mat-error>{{ error.message }}</mat-error>
+  } } @if (hidePassword()) {
+  <mat-form-field appearance="outline">
+    <mat-label>Password</mat-label>
+    <input matInput type="password" [field]="signInForm.password" />
+    <mat-icon matIconPrefix>password</mat-icon>
+    <mat-icon matIconSuffix (click)="togglePasswordVisibility()">visibility_off</mat-icon>
+  </mat-form-field>
+  } @else {
+  <mat-form-field appearance="outline">
+    <mat-label>Password</mat-label>
+    <input matInput type="text" [field]="signInForm.password" />
+    <mat-icon matIconPrefix>password</mat-icon>
+    <mat-icon matIconSuffix (click)="togglePasswordVisibility()">visibility</mat-icon>
+  </mat-form-field>
+  }
+</form>
+@if (authStore.error()) {
+<p class="error-message">{{ authStore.error() }}</p>
+}
+<button matButton="tonal" [disabled]="!signInForm().valid()" (click)="signInWithEmail($event)">
+  Sign In
+</button>
+<p>Don't have an account? <a routerLink="/sign-up">Sign Up</a></p>
+<p>
+  Forgot your password?
+  <a routerLink="/reset-password" (click)="setStoredEmail()">Reset Password</a>
+</p>
+}
