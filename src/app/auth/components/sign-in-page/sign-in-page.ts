@@ -65,11 +65,6 @@ export class SignInPage {
     this.authStore.signInWithGoogle();
   }
 
-  // This is temporary until we implement a user profile page
-  signOut(): void {
-    this.authStore.signOut();
-  }
-
   signInWithEmail(event: Event): void {
     event.preventDefault();
     const credentials = this.signInModel();

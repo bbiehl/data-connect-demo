@@ -2,18 +2,12 @@
 <p>Loading...</p>
 } @else {
 <h1>Welcome!</h1>
-<p>User: {{ authStore.authenticatedUser()?.email | json }}</p>
-@if (!!authStore.authenticatedUser()) {
-<button matButton="outlined" (click)="signOut()">Sign Out</button>
-}
-
 <h2>Enter your details to access account</h2>
 
 <button matButton="outlined" (click)="signInWithGoogle()">
   <mat-icon svgIcon="google-icon"></mat-icon>
   Sign in with Google
 </button>
-
 
 <section class="divider">
   <mat-divider></mat-divider>
