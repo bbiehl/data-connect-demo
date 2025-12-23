@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './auth/auth.guard';
 
 export const routes: Routes = [
   {
@@ -22,8 +23,8 @@ export const routes: Routes = [
     title: 'Sign In',
   },
   {
-    // need guard to prevent access if not authenticated
     path: 'verify-email',
+    canActivate: [authGuard],
     loadComponent: () =>
       import('./auth/components/verify-email-page/verify-email-page').then(
         (c) => c.VerifyEmailPage
@@ -33,5 +34,11 @@ export const routes: Routes = [
   //need a route for complete your profile page when signing in with google
   //need a route for sign-up
   //need a route for profile page
-  //need a 404 page
+
+  {
+    //need a 404 page
+    path: '**',
+    loadComponent: () => import('./shared/components/not-found-page/not-found-page').then((c) => c.NotFoundPage),
+    title: 'Page Not Found',
+  },
 ];
