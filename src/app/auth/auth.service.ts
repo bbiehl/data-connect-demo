@@ -17,18 +17,17 @@ export class AuthService {
   private auth = inject(Auth);
   private router = inject(Router);
   public storedEmail = signal<string | null>(null);
-  public storedPassword = signal<string | null>(null);
 
   getAuthenticatedUser$(): Observable<User | null> {
     return authState(this.auth);
   }
 
-  setStoredEmail(email: string): void {
-    this.storedEmail.set(email);
+  sendEmailVerificationEmail(): void {
+    console.log('Sending verification email to', this.auth.currentUser?.email);
   }
 
-  setStoredPassword(password: string): void {
-    this.storedPassword.set(password);
+  setStoredEmail(email: string): void {
+    this.storedEmail.set(email);
   }
 
   signInWithEmailAndPassword(email: string, password: string): Observable<User | null> {

@@ -1,0 +1,5 @@
+<h1>Please verify your email</h1>
+<h2>{{ authStore.authenticatedUser()?.email }}</h2>
+<button matButton="filled" (click)="sendVerificationEmail()">
+    Send Verification Email
+</button>
