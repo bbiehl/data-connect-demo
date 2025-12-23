@@ -3,6 +3,7 @@ import {
   Auth,
   authState,
   GoogleAuthProvider,
+  sendEmailVerification,
   signInWithEmailAndPassword,
   signInWithPopup,
   User,
@@ -23,12 +24,15 @@ export class AuthService {
   }
 
   resetPassword(email: string): void {
+    // check if email exists in the firebase auth system before sending reset email
+    // should this be handled in the auth store?
     console.log('Initiating password reset for', email);
   }
 
 
-  sendEmailVerificationEmail(): void {
+  sendEmailVerificationEmail(): Observable<void> {
     console.log('Sending verification email to', this.auth.currentUser?.email);
+    return from(sendEmailVerification(this.auth.currentUser!));
   }
 
   setStoredEmail(email: string): void {

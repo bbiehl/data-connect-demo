@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../auth.service';
+import { AuthStore } from '../../auth.store';
 
 @Component({
   selector: 'app-reset-password-page',
@@ -23,6 +24,7 @@ import { AuthService } from '../../auth.service';
 })
 export class ResetPasswordPage {
   private readonly authService = inject(AuthService);
+  private readonly authStore = inject(AuthStore);
   email = new FormControl<string>(this.authService.storedEmail() ?? '', [
     Validators.required,
     Validators.email,
@@ -31,7 +33,7 @@ export class ResetPasswordPage {
   handleResetPassword(): void {
     const emailValue = this.email.value;
     if (emailValue) {
-      this.authService.resetPassword(emailValue);
+      this.authStore.resetPassword({ email: emailValue });
     }
   }
 }

@@ -12,10 +12,9 @@ import { AuthStore } from '../../auth.store';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VerifyEmailPage {
-  private readonly authService = inject(AuthService);
-  protected readonly authStore = inject(AuthStore);
+  private readonly authStore = inject(AuthStore);
   
   sendVerificationEmail(): void {
-    this.authService.sendEmailVerificationEmail();
+    this.authStore.sendEmailVerificationEmail();
   }
 }
