@@ -7,15 +7,27 @@ export const routes: Routes = [
     title: 'Home',
   },
   {
+    path: 'reset-password',
+    loadComponent: () =>
+      import('./auth/components/reset-password-page/reset-password-page').then(
+        (c) => c.ResetPasswordPage
+      ),
+    title: 'Reset Password',
+  },
+  {
     path: 'sign-in',
-    loadComponent: () => import('./auth/components/sign-in-page/sign-in-page').then((c) => c.SignInPage),
+    loadComponent: () =>
+      import('./auth/components/sign-in-page/sign-in-page').then((c) => c.SignInPage),
     title: 'Sign In',
   },
   {
     path: 'verify-email',
-    loadComponent: () => import('./auth/components/verify-email-page/verify-email-page').then((c) => c.VerifyEmailPage),
+    loadComponent: () =>
+      import('./auth/components/verify-email-page/verify-email-page').then(
+        (c) => c.VerifyEmailPage
+      ),
     title: 'Verify Email',
-  }
+  },
   //need a route for complete your profile page when signing in with google
   //need a route for sign-up
   //need a route for password reset

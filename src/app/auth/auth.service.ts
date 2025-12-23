@@ -22,6 +22,11 @@ export class AuthService {
     return authState(this.auth);
   }
 
+  resetPassword(email: string): void {
+    console.log('Initiating password reset for', email);
+  }
+
+
   sendEmailVerificationEmail(): void {
     console.log('Sending verification email to', this.auth.currentUser?.email);
   }

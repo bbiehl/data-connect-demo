@@ -7,7 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { DomSanitizer } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { GOOGLE_ICON } from '../../../shared/constants/icons.const';
 import { AuthService } from '../../auth.service';
 import { AuthStore } from '../../auth.store';
@@ -34,7 +34,9 @@ interface SignInData {
 })
 export class SignInPage {
   private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
   protected readonly authStore = inject(AuthStore);
+
   hidePassword = signal(true);
   signInModel = signal<SignInData>({
     email: '',
@@ -52,11 +54,9 @@ export class SignInPage {
     iconRegistry.addSvgIconLiteral('google-icon', sanitizer.bypassSecurityTrustHtml(GOOGLE_ICON));
   }
 
-  setStoredEmail(): void {
-    if (this.signInForm.email().valid()) {
-      const email = this.signInForm.email().value();
-      this.authService.setStoredEmail(email);
-    }
+  handlePasswordReset(): void {
+    this.setStoredEmail();
+    this.router.navigate(['/reset-password']);
   }
 
   signInWithGoogle(): void {
@@ -71,5 +71,12 @@ export class SignInPage {
 
   togglePasswordVisibility(): void {
     this.hidePassword.update((current) => !current);
+  }
+
+  private setStoredEmail(): void {
+    if (this.signInForm.email().valid()) {
+      const email = this.signInForm.email().value();
+      this.authService.setStoredEmail(email);
+    }
   }
 }
