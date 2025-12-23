@@ -7,10 +7,10 @@ mutation CreateMovie($title: String!, $genre: String!, $imageUrl: String!)
 }
 
 # Upsert (update or insert) a user's username based on their auth.uid
-mutation UpsertUser($username: String!, $email: String!) @auth(level: USER) {
+mutation UpsertUser($displayName: String!, $email: String!) @auth(level: USER) {
   # The "auth.uid" server value ensures that users can only register their own user.
-  user_upsert(data: { id_expr: "auth.uid", username: $username, email: $email })
-  # Note: role defaults to STANDARD in the schema. No need to set it manually.
+  user_upsert(data: { id_expr: "auth.uid", displayName: $displayName, email: $email })
+  # Note: role defaults to BASIC in the schema. No need to set it manually.
 }
 
 # Upsert (update or insert) a review for a movie
