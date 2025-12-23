@@ -59,13 +59,6 @@ export class SignInPage {
     }
   }
 
-  setStoredPassword(): void {
-    if (this.signInForm.password().valid()) {
-      const password = this.signInForm.password().value();
-      this.authService.setStoredPassword(password);
-    }
-  }
-
   signInWithGoogle(): void {
     this.authStore.signInWithGoogle();
   }
