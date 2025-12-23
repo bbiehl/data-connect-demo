@@ -12,6 +12,7 @@ import {
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { distinctUntilChanged, pipe, switchMap, tap } from 'rxjs';
 import { AuthService } from './auth.service';
+import { Router } from '@angular/router';
 
 type AuthState = {
   authenticatedUser: User | null;
@@ -107,9 +108,19 @@ export const AuthStore = signalStore(
     ),
   })),
   withHooks({
-    onInit(store) {
+    onInit(store, router = inject(Router)) {
       watchState(store, (state) => {
         console.log('Auth State Changed', state);
+        if (!!state.authenticatedUser) {
+          if (!state.authenticatedUser?.emailVerified) {
+            console.warn('User is not verified');
+            router.navigate(['/verify-email']);
+          } else {
+            console.warn('User is verified', state.authenticatedUser.email);
+          }
+        } else {
+          console.warn('No authenticated user');
+        }
       });
     },
   })

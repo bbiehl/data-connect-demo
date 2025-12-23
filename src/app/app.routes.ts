@@ -11,6 +11,11 @@ export const routes: Routes = [
     loadComponent: () => import('./auth/components/sign-in-page/sign-in-page').then((c) => c.SignInPage),
     title: 'Sign In',
   },
+  {
+    path: 'verify-email',
+    loadComponent: () => import('./auth/components/verify-email-page/verify-email-page').then((c) => c.VerifyEmailPage),
+    title: 'Verify Email',
+  }
   //need a route for complete your profile page when signing in with google
   //need a route for sign-up
   //need a route for password reset
