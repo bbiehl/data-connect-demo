@@ -1,7 +1,23 @@
-const { listMoviesRef, listUsersRef, listUserReviewsRef, getMovieByIdRef, searchMovieRef, createMovieRef, upsertUserRef, upsertReviewRef, deleteReviewRef } = require('../');
+const { createMovieRef, upsertUserRef, upsertReviewRef, deleteReviewRef, listMoviesRef, listUsersRef, getUserByIdRef, listUserReviewsRef, getMovieByIdRef, searchMovieRef } = require('../');
 const { DataConnect, CallerSdkTypeEnum } = require('@angular/fire/data-connect');
 const { injectDataConnectQuery, injectDataConnectMutation } = require('@tanstack-query-firebase/angular/data-connect');
 const { inject, EnvironmentInjector } = require('@angular/core');
+
+exports.injectCreateMovie = function injectCreateMovie(args, injector) {
+  return injectDataConnectMutation(createMovieRef, args, injector, CallerSdkTypeEnum.GeneratedAngular);
+}
+
+exports.injectUpsertUser = function injectUpsertUser(args, injector) {
+  return injectDataConnectMutation(upsertUserRef, args, injector, CallerSdkTypeEnum.GeneratedAngular);
+}
+
+exports.injectUpsertReview = function injectUpsertReview(args, injector) {
+  return injectDataConnectMutation(upsertReviewRef, args, injector, CallerSdkTypeEnum.GeneratedAngular);
+}
+
+exports.injectDeleteReview = function injectDeleteReview(args, injector) {
+  return injectDataConnectMutation(deleteReviewRef, args, injector, CallerSdkTypeEnum.GeneratedAngular);
+}
 
 exports.injectListMovies = function injectListMovies(options, injector) {
   const finalInjector = injector || inject(EnvironmentInjector);
@@ -22,6 +38,19 @@ exports.injectListUsers = function injectListUsers(options, injector) {
     const addOpn = options && options();
     return {
       queryFn: () =>  listUsersRef(dc),
+      ...addOpn
+    };
+  }, finalInjector, CallerSdkTypeEnum.GeneratedAngular);
+}
+
+exports.injectGetUserById = function injectGetUserById(args, options, injector) {
+  const finalInjector = injector || inject(EnvironmentInjector);
+  const dc = finalInjector.get(DataConnect);
+  const varsFactoryFn = (typeof args === 'function') ? args : () => args;
+  return injectDataConnectQuery(() => {
+    const addOpn = options && options();
+    return {
+      queryFn: () =>  getUserByIdRef(dc, varsFactoryFn()),
       ...addOpn
     };
   }, finalInjector, CallerSdkTypeEnum.GeneratedAngular);
@@ -63,21 +92,5 @@ exports.injectSearchMovie = function injectSearchMovie(args, options, injector) 
       ...addOpn
     };
   }, finalInjector, CallerSdkTypeEnum.GeneratedAngular);
-}
-
-exports.injectCreateMovie = function injectCreateMovie(args, injector) {
-  return injectDataConnectMutation(createMovieRef, args, injector, CallerSdkTypeEnum.GeneratedAngular);
-}
-
-exports.injectUpsertUser = function injectUpsertUser(args, injector) {
-  return injectDataConnectMutation(upsertUserRef, args, injector, CallerSdkTypeEnum.GeneratedAngular);
-}
-
-exports.injectUpsertReview = function injectUpsertReview(args, injector) {
-  return injectDataConnectMutation(upsertReviewRef, args, injector, CallerSdkTypeEnum.GeneratedAngular);
-}
-
-exports.injectDeleteReview = function injectDeleteReview(args, injector) {
-  return injectDataConnectMutation(deleteReviewRef, args, injector, CallerSdkTypeEnum.GeneratedAngular);
 }
 

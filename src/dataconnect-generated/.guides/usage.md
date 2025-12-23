@@ -11,7 +11,7 @@ The generated SDK creates injectable wrapper functions.
 
 Here's an example:
 ```
-import { injectListMovies, injectListUsers, injectListUserReviews, injectGetMovieById, injectSearchMovie, injectCreateMovie, injectUpsertUser, injectUpsertReview, injectDeleteReview } from '@dataconnect/generated/angular';
+import { injectCreateMovie, injectUpsertUser, injectUpsertReview, injectDeleteReview, injectListMovies, injectListUsers, injectGetUserById, injectListUserReviews, injectGetMovieById, injectSearchMovie } from '@dataconnect/generated/angular';
 
 @Component({
   selector: 'my-component',
@@ -19,15 +19,16 @@ import { injectListMovies, injectListUsers, injectListUserReviews, injectGetMovi
 })
 class MyComponent {
   // The types of these injectors are available in angular/index.d.ts
-  private readonly ListMoviesOperation = injectListMovies();
-  private readonly ListUsersOperation = injectListUsers();
-  private readonly ListUserReviewsOperation = injectListUserReviews();
-  private readonly GetMovieByIdOperation = injectGetMovieById(getMovieByIdVars);
-  private readonly SearchMovieOperation = injectSearchMovie(searchMovieVars);
   private readonly CreateMovieOperation = injectCreateMovie(createMovieVars);
   private readonly UpsertUserOperation = injectUpsertUser(upsertUserVars);
   private readonly UpsertReviewOperation = injectUpsertReview(upsertReviewVars);
   private readonly DeleteReviewOperation = injectDeleteReview(deleteReviewVars);
+  private readonly ListMoviesOperation = injectListMovies();
+  private readonly ListUsersOperation = injectListUsers();
+  private readonly GetUserByIdOperation = injectGetUserById(getUserByIdVars);
+  private readonly ListUserReviewsOperation = injectListUserReviews();
+  private readonly GetMovieByIdOperation = injectGetMovieById(getMovieByIdVars);
+  private readonly SearchMovieOperation = injectSearchMovie(searchMovieVars);
   }
 ```
 
@@ -70,23 +71,8 @@ If a user is not using a supported framework, they can use the generated SDK dir
 Here's an example of how to use it with the first 5 operations:
 
 ```js
-import { listMovies, listUsers, listUserReviews, getMovieById, searchMovie, createMovie, upsertUser, upsertReview, deleteReview } from '@dataconnect/generated';
+import { createMovie, upsertUser, upsertReview, deleteReview, listMovies, listUsers, getUserById, listUserReviews, getMovieById, searchMovie } from '@dataconnect/generated';
 
-
-// Operation ListMovies: 
-const { data } = await ListMovies(dataConnect);
-
-// Operation ListUsers: 
-const { data } = await ListUsers(dataConnect);
-
-// Operation ListUserReviews: 
-const { data } = await ListUserReviews(dataConnect);
-
-// Operation GetMovieById:  For variables, look at type GetMovieByIdVars in ../index.d.ts
-const { data } = await GetMovieById(dataConnect, getMovieByIdVars);
-
-// Operation SearchMovie:  For variables, look at type SearchMovieVars in ../index.d.ts
-const { data } = await SearchMovie(dataConnect, searchMovieVars);
 
 // Operation CreateMovie:  For variables, look at type CreateMovieVars in ../index.d.ts
 const { data } = await CreateMovie(dataConnect, createMovieVars);
@@ -99,6 +85,24 @@ const { data } = await UpsertReview(dataConnect, upsertReviewVars);
 
 // Operation DeleteReview:  For variables, look at type DeleteReviewVars in ../index.d.ts
 const { data } = await DeleteReview(dataConnect, deleteReviewVars);
+
+// Operation ListMovies: 
+const { data } = await ListMovies(dataConnect);
+
+// Operation ListUsers: 
+const { data } = await ListUsers(dataConnect);
+
+// Operation GetUserById:  For variables, look at type GetUserByIdVars in ../index.d.ts
+const { data } = await GetUserById(dataConnect, getUserByIdVars);
+
+// Operation ListUserReviews: 
+const { data } = await ListUserReviews(dataConnect);
+
+// Operation GetMovieById:  For variables, look at type GetMovieByIdVars in ../index.d.ts
+const { data } = await GetMovieById(dataConnect, getMovieByIdVars);
+
+// Operation SearchMovie:  For variables, look at type SearchMovieVars in ../index.d.ts
+const { data } = await SearchMovie(dataConnect, searchMovieVars);
 
 
 ```

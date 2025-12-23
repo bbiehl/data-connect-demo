@@ -13,66 +13,6 @@ const connectorConfig = {
 };
 exports.connectorConfig = connectorConfig;
 
-const listMoviesRef = (dc) => {
-  const { dc: dcInstance} = validateArgs(connectorConfig, dc, undefined);
-  dcInstance._useGeneratedSdk();
-  return queryRef(dcInstance, 'ListMovies');
-}
-listMoviesRef.operationName = 'ListMovies';
-exports.listMoviesRef = listMoviesRef;
-
-exports.listMovies = function listMovies(dc) {
-  return executeQuery(listMoviesRef(dc));
-};
-
-const listUsersRef = (dc) => {
-  const { dc: dcInstance} = validateArgs(connectorConfig, dc, undefined);
-  dcInstance._useGeneratedSdk();
-  return queryRef(dcInstance, 'ListUsers');
-}
-listUsersRef.operationName = 'ListUsers';
-exports.listUsersRef = listUsersRef;
-
-exports.listUsers = function listUsers(dc) {
-  return executeQuery(listUsersRef(dc));
-};
-
-const listUserReviewsRef = (dc) => {
-  const { dc: dcInstance} = validateArgs(connectorConfig, dc, undefined);
-  dcInstance._useGeneratedSdk();
-  return queryRef(dcInstance, 'ListUserReviews');
-}
-listUserReviewsRef.operationName = 'ListUserReviews';
-exports.listUserReviewsRef = listUserReviewsRef;
-
-exports.listUserReviews = function listUserReviews(dc) {
-  return executeQuery(listUserReviewsRef(dc));
-};
-
-const getMovieByIdRef = (dcOrVars, vars) => {
-  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
-  dcInstance._useGeneratedSdk();
-  return queryRef(dcInstance, 'GetMovieById', inputVars);
-}
-getMovieByIdRef.operationName = 'GetMovieById';
-exports.getMovieByIdRef = getMovieByIdRef;
-
-exports.getMovieById = function getMovieById(dcOrVars, vars) {
-  return executeQuery(getMovieByIdRef(dcOrVars, vars));
-};
-
-const searchMovieRef = (dcOrVars, vars) => {
-  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars);
-  dcInstance._useGeneratedSdk();
-  return queryRef(dcInstance, 'SearchMovie', inputVars);
-}
-searchMovieRef.operationName = 'SearchMovie';
-exports.searchMovieRef = searchMovieRef;
-
-exports.searchMovie = function searchMovie(dcOrVars, vars) {
-  return executeQuery(searchMovieRef(dcOrVars, vars));
-};
-
 const createMovieRef = (dcOrVars, vars) => {
   const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
   dcInstance._useGeneratedSdk();
@@ -119,4 +59,76 @@ exports.deleteReviewRef = deleteReviewRef;
 
 exports.deleteReview = function deleteReview(dcOrVars, vars) {
   return executeMutation(deleteReviewRef(dcOrVars, vars));
+};
+
+const listMoviesRef = (dc) => {
+  const { dc: dcInstance} = validateArgs(connectorConfig, dc, undefined);
+  dcInstance._useGeneratedSdk();
+  return queryRef(dcInstance, 'ListMovies');
+}
+listMoviesRef.operationName = 'ListMovies';
+exports.listMoviesRef = listMoviesRef;
+
+exports.listMovies = function listMovies(dc) {
+  return executeQuery(listMoviesRef(dc));
+};
+
+const listUsersRef = (dc) => {
+  const { dc: dcInstance} = validateArgs(connectorConfig, dc, undefined);
+  dcInstance._useGeneratedSdk();
+  return queryRef(dcInstance, 'ListUsers');
+}
+listUsersRef.operationName = 'ListUsers';
+exports.listUsersRef = listUsersRef;
+
+exports.listUsers = function listUsers(dc) {
+  return executeQuery(listUsersRef(dc));
+};
+
+const getUserByIdRef = (dcOrVars, vars) => {
+  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
+  dcInstance._useGeneratedSdk();
+  return queryRef(dcInstance, 'GetUserById', inputVars);
+}
+getUserByIdRef.operationName = 'GetUserById';
+exports.getUserByIdRef = getUserByIdRef;
+
+exports.getUserById = function getUserById(dcOrVars, vars) {
+  return executeQuery(getUserByIdRef(dcOrVars, vars));
+};
+
+const listUserReviewsRef = (dc) => {
+  const { dc: dcInstance} = validateArgs(connectorConfig, dc, undefined);
+  dcInstance._useGeneratedSdk();
+  return queryRef(dcInstance, 'ListUserReviews');
+}
+listUserReviewsRef.operationName = 'ListUserReviews';
+exports.listUserReviewsRef = listUserReviewsRef;
+
+exports.listUserReviews = function listUserReviews(dc) {
+  return executeQuery(listUserReviewsRef(dc));
+};
+
+const getMovieByIdRef = (dcOrVars, vars) => {
+  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
+  dcInstance._useGeneratedSdk();
+  return queryRef(dcInstance, 'GetMovieById', inputVars);
+}
+getMovieByIdRef.operationName = 'GetMovieById';
+exports.getMovieByIdRef = getMovieByIdRef;
+
+exports.getMovieById = function getMovieById(dcOrVars, vars) {
+  return executeQuery(getMovieByIdRef(dcOrVars, vars));
+};
+
+const searchMovieRef = (dcOrVars, vars) => {
+  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars);
+  dcInstance._useGeneratedSdk();
+  return queryRef(dcInstance, 'SearchMovie', inputVars);
+}
+searchMovieRef.operationName = 'SearchMovie';
+exports.searchMovieRef = searchMovieRef;
+
+exports.searchMovie = function searchMovie(dcOrVars, vars) {
+  return executeQuery(searchMovieRef(dcOrVars, vars));
 };

@@ -18,6 +18,7 @@ You can also follow the instructions from the [Data Connect documentation](https
 - [**Queries**](#queries)
   - [*ListMovies*](#listmovies)
   - [*ListUsers*](#listusers)
+  - [*GetUserById*](#getuserbyid)
   - [*ListUserReviews*](#listuserreviews)
   - [*GetMovieById*](#getmoviebyid)
   - [*SearchMovie*](#searchmovie)
@@ -201,7 +202,7 @@ To access the data returned by a Query, use the `CreateDataConnectQueryResult.da
 export interface ListUsersData {
   users: ({
     id: string;
-    username: string;
+    displayName: string;
     email: string;
     role: UserRole;
   } & User_Key)[];
@@ -252,6 +253,89 @@ export class MyComponent {
 }
 ```
 
+## GetUserById
+You can execute the `GetUserById` Query using the following Query injector, which is defined in [dataconnect-generated/angular/index.d.ts](./index.d.ts):
+
+```javascript
+injectGetUserById(args: GetUserByIdArgs, options?: GetUserByIdOptions, injector?: Injector): CreateDataConnectQueryResult<GetUserByIdData, GetUserByIdVariables>;
+```
+
+### Variables
+The `GetUserById` Query requires an argument of type `GetUserByIdVariables`, which is defined in [dataconnect-generated/index.d.ts](../index.d.ts). It has the following fields:
+
+```javascript
+export interface GetUserByIdVariables {
+  id: string;
+}
+```
+### Return Type
+Recall that calling the `GetUserById` Query injector returns a `CreateDataConnectQueryResult` object. This object holds the state of your Query, including whether the Query is loading, has completed, or has succeeded/failed, and any data returned by the Query, among other things.
+
+To check the status of a Query, use the `CreateDataConnectQueryResult.status()` function. You can also check for pending / success / error status using the `CreateDataConnectQueryResult.isPending()`, `CreateDataConnectQueryResult.isSuccess()`, and `CreateDataConnectQueryResult.isError()` functions.
+
+To access the data returned by a Query, use the `CreateDataConnectQueryResult.data()` function. The data for the `GetUserById` Query is of type `GetUserByIdData`, which is defined in [dataconnect-generated/index.d.ts](../index.d.ts). It has the following fields:
+```javascript
+export interface GetUserByIdData {
+  user?: {
+    id: string;
+    displayName: string;
+    email: string;
+    role: UserRole;
+  } & User_Key;
+}
+```
+
+To learn more about the `CreateDataConnectQueryResult` object, see the [TanStack Query Firebase documentation](https://docs.page/invertase/tanstack-query-firebase/angular/data-connect/functions/injectDataConnectQuery) and the [TanStack Angular Query documentation](https://tanstack.com/query/v5/docs/framework/angular/reference/functions/injectquery).
+
+### Using `GetUserById`'s Query injector
+
+```javascript
+... // other imports
+import { connectorConfig, GetUserByIdVariables } from '@dataconnect/generated';
+import { injectGetUserById, GetUserByIdOptions } from '@dataconnect/generated/angular'
+import { DataConnect } from '@angular/fire/data-connect';
+import { initializeApp } from '@angular/fire/app';
+
+@Component({
+  ... // other component fields
+  template: `
+    <!-- You can render your component dynamically based on the status of the Query. -->
+    @if (query.isPending()) {
+      Loading...
+    }
+    @if (query.error()) {
+      An error has occurred: {{ query.error() }}
+    }
+    <!-- If the Query is successful, you can access the data returned using
+      the CreateDataConnectQueryResult.data() function. -->
+    @if (query.data(); as data) {
+      <!-- use your data to display something -->
+            <div>Query successful!</div>
+    }
+  `,
+})
+export class MyComponent {
+  // The `GetUserById` Query requires an argument of type `GetUserByIdVariables`:
+  getUserByIdVars: GetUserByIdVariables = {
+    id: ..., 
+  };
+
+  // Since the execution of the query is eager, you don't have to call `execute` to "execute" the Query.
+  // Call the Query injector function to get a `CreateDataConnectQueryResult` object which holds the state of your Query.
+  query = injectGetUserById(this.getUserByIdVars);
+  // Variables can be defined inline as well.
+  query = injectGetUserById({ id: ..., });
+
+  // You can also pass in an options function (not object) of type `GetUserByIdOptions` to the Query injector function.
+  options: GetUserByIdOptions = () => {
+    return {
+      staleTime: 5 * 1000
+    };
+  };
+  query = injectGetUserById(this.getUserByIdVars, this.options);
+}
+```
+
 ## ListUserReviews
 You can execute the `ListUserReviews` Query using the following Query injector, which is defined in [dataconnect-generated/angular/index.d.ts](./index.d.ts):
 
@@ -271,7 +355,7 @@ To access the data returned by a Query, use the `CreateDataConnectQueryResult.da
 export interface ListUserReviewsData {
   user?: {
     id: string;
-    username: string;
+    displayName: string;
     reviews: ({
       rating?: number | null;
       reviewDate: DateString;
@@ -368,7 +452,7 @@ export interface GetMovieByIdData {
         rating?: number | null;
         user: {
           id: string;
-          username: string;
+          displayName: string;
         } & User_Key;
       })[];
   } & Movie_Key;
@@ -654,7 +738,7 @@ The `UpsertUser` Mutation requires an argument of type `UpsertUserVariables`, wh
 
 ```javascript
 export interface UpsertUserVariables {
-  username: string;
+  displayName: string;
   email: string;
 }
 ```
@@ -726,12 +810,12 @@ export class MyComponent {
   executeMutation() {
     // The `UpsertUser` Mutation requires an argument of type `UpsertUserVariables`:
     const upsertUserVars: UpsertUserVariables = {
-      username: ..., 
+      displayName: ..., 
       email: ..., 
     };
     this.mutation.mutate(upsertUserVars);
     // Variables can be defined inline as well.
-    this.mutation.mutate({ username: ..., email: ..., });
+    this.mutation.mutate({ displayName: ..., email: ..., });
 
     // You can call `CreateDataConnectMutationResult.mutateAsync()` to execute the Mutation and return a promise with the data returned from the Mutation.
     this.mutation.mutateAsync(upsertUserVars);
