@@ -69,21 +69,21 @@ export const AuthStore = signalStore(
     ),
 
     // wip
-        sendEmailVerificationEmail: rxMethod<void>(
-          pipe(
-            tap(() => console.log('AuthStore: sendEmailVerificationEmail method triggered.')),
-            tap(() => patchState(store, { pending: true, error: null })),
-            switchMap(() => {
-              return authService.sendEmailVerificationEmail().pipe(
-                tapResponse({
-                  next: () => patchState(store, { pending: false, error: null }),
-                  error: (error: { message: string }) =>
-                    patchState(store, { pending: false, error: error.message }),
-                })
-              );
+    sendEmailVerificationEmail: rxMethod<void>(
+      pipe(
+        tap(() => console.log('AuthStore: sendEmailVerificationEmail method triggered.')),
+        tap(() => patchState(store, { pending: true, error: null })),
+        switchMap(() => {
+          return authService.sendEmailVerificationEmail().pipe(
+            tapResponse({
+              next: () => patchState(store, { pending: false, error: null }),
+              error: (error: { message: string }) =>
+                patchState(store, { pending: false, error: error.message }),
             })
-          )
-        ),
+          );
+        })
+      )
+    ),
 
     signInWithEmailAndPassword: rxMethod<{ email: string; password: string }>(
       pipe(
