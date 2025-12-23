@@ -4,12 +4,13 @@ import {
   authState,
   GoogleAuthProvider,
   sendEmailVerification,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
   User,
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { from, Observable, switchMap } from 'rxjs';
+import { catchError, from, Observable, of, switchMap, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -23,16 +24,27 @@ export class AuthService {
     return authState(this.auth);
   }
 
-  resetPassword(email: string): void {
-    // check if email exists in the firebase auth system before sending reset email
-    // should this be handled in the auth store?
-    console.log('Initiating password reset for', email);
+  sendResetPasswordEmail(email: string): Observable<void> {
+    console.log('Initiating password reset for', this.auth.currentUser?.email);
+    return from(sendPasswordResetEmail(this.auth, email));
   }
 
-
   sendEmailVerificationEmail(): Observable<void> {
-    console.log('Sending verification email to', this.auth.currentUser?.email);
-    return from(sendEmailVerification(this.auth.currentUser!));
+    console.log('AuthService: sendEmailVerificationEmail called.');
+    console.log('AuthService: Current user object:', this.auth.currentUser);
+
+    if (!this.auth.currentUser) {
+      console.error('AuthService: Cannot send verification email, user is null.');
+      return of(undefined);
+    }
+
+    return from(sendEmailVerification(this.auth.currentUser)).pipe(
+      tap(() => console.log('AuthService: sendEmailVerification successful (Promise resolved).')),
+      catchError((error) => {
+        console.error('AuthService: Error sending verification email:', error);
+        return of(undefined);
+      })
+    );
   }
 
   setStoredEmail(email: string): void {

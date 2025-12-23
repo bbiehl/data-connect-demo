@@ -1,5 +1,6 @@
 import { inject } from '@angular/core';
 import { User } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 import { tapResponse } from '@ngrx/operators';
 import {
   patchState,
@@ -12,8 +13,6 @@ import {
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { distinctUntilChanged, pipe, switchMap, tap } from 'rxjs';
 import { AuthService } from './auth.service';
-import { Router } from '@angular/router';
-import { sendEmailVerification } from 'firebase/auth';
 
 type AuthState = {
   authenticatedUser: User | null;
@@ -58,19 +57,7 @@ export const AuthStore = signalStore(
         distinctUntilChanged(),
         tap(() => patchState(store, { pending: true, error: null })),
         switchMap(({ email }) => {
-          authService.resetPassword(email);
-          return [];
-        })
-      )
-    ),
-
-    // wip
-    sendEmailVerificationEmail: rxMethod<void>(
-      pipe(
-        distinctUntilChanged(),
-        tap(() => patchState(store, { pending: true, error: null })),
-        switchMap(() => {
-          return authService.sendEmailVerificationEmail().pipe(
+          return authService.sendResetPasswordEmail(email).pipe(
             tapResponse({
               next: () => patchState(store, { pending: false, error: null }),
               error: (error: { message: string }) =>
@@ -81,6 +68,22 @@ export const AuthStore = signalStore(
       )
     ),
 
+    // wip
+        sendEmailVerificationEmail: rxMethod<void>(
+          pipe(
+            tap(() => console.log('AuthStore: sendEmailVerificationEmail method triggered.')),
+            tap(() => patchState(store, { pending: true, error: null })),
+            switchMap(() => {
+              return authService.sendEmailVerificationEmail().pipe(
+                tapResponse({
+                  next: () => patchState(store, { pending: false, error: null }),
+                  error: (error: { message: string }) =>
+                    patchState(store, { pending: false, error: error.message }),
+                })
+              );
+            })
+          )
+        ),
 
     signInWithEmailAndPassword: rxMethod<{ email: string; password: string }>(
       pipe(
@@ -124,7 +127,6 @@ export const AuthStore = signalStore(
     ),
     signOut: rxMethod<void>(
       pipe(
-        // distinctUntilChanged(),
         tap(() => patchState(store, { pending: true, error: null })),
         switchMap(() => {
           return authService.signOut().pipe(

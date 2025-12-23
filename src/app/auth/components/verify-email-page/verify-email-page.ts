@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { AuthService } from '../../auth.service';
 import { AuthStore } from '../../auth.store';
 
 @Component({
@@ -12,9 +11,10 @@ import { AuthStore } from '../../auth.store';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VerifyEmailPage {
-  private readonly authStore = inject(AuthStore);
-  
+  protected readonly authStore = inject(AuthStore);
+
   sendVerificationEmail(): void {
+    console.log('VerifyEmailPage: sendVerificationEmail() called.');
     this.authStore.sendEmailVerificationEmail();
   }
 }
